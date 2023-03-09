@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="modoo.module.sale.service.impl.SaleMapper">
+
+	<insert id="insertSaleGoods" parameterType="modoo.module.sale.service.impl.SaleVO">
+		INSERT INTO STN_SALES (
+			EXPSR_ORDR
+			, GOODS_ID
+			, PRTNR_ID
+			, ACTVTY_AT
+		  	, TYPE_CODE
+			, EXPSR_BEGIN_DE
+			, EXPSR_END_DE
+		)
+		VALUES	(
+			#{expsrOrdr}
+			, #{goodsId}
+			, #{prtnrId}
+			, #{actvtyAt}
+		 	, #{typeCode}
+			, #{expsrBeginDe}
+			, #{expsrEndDe}
+		)
+	</insert>
+
+	<delete id="deleteSaleGoods" parameterType="modoo.module.sale.service.impl.SaleVO">
+		DELETE FROM STN_SALES
+		WHERE PRTNR_ID = #{prtnrId}
+		AND TYPE_CODE = #{typeCode}
+	</delete>
+
+	<select id="selectSaleGoodsList" parameterType="modoo.module.sale.service.impl.SaleVO" resultType="egovMap">
+		SELECT
+			A.EXPSR_ORDR
+			, A.GOODS_ID
+			, A.PRTNR_ID
+			, A.EXPSR_BEGIN_DE
+			, A.EXPSR_END_DE
+			, '' EDIT
+			, A.ACTVTY_AT
+			, A.TYPE_CODE
+-- 			, A.LABEL_TY_CODE
+-- 			, A.LABEL_TEXT
+-- 			, A.LABEL_COLOR
+-- 			, A.LABEL_TEXT_COLOR
+			,(SELECT GOODS_IMAGE_THUMB_PATH FROM STN_GOODS_IMAGE WHERE GOODS_ID = B.GOODS_ID AND GOODS_IMAGE_SE_CODE = 'GNR' ORDER BY GOODS_IMAGE_SN ASC LIMIT 1 ) AS GOODS_IMAGE
+			, C.CMPNY_NM
+			, B.GOODS_NM
+			, B.GOODS_PC
+			, B.MRKT_PC
+			, B.MRKT_USE_AT
+			, B.REGIST_STTUS_CODE
+			, B.GOODS_KND_CODE
+			, B.SBSCRPT_CYCLE_SE_CODE
+			, B.SBSCRPT_WEEK_CYCLE
+			, B.SBSCRPT_DLVY_WD
+			, B.SBSCRPT_MIN_USE_WEEK
+			, B.SBSCRPT_MT_CYCLE
+			, B.SBSCRPT_MIN_USE_MT
+			 ,B.SBSCRPT_DLVY_DAY
+			 ,B.SBSCRPT_SETLE_DAY
+			,CASE WHEN
+			B.GOODS_ID IN (
+			SELECT
+			BB.GOODS_ID
+			FROM STN_GOODS_EVENT AA
+			JOIN STN_GOODS_EVENT_MAPNG BB ON AA.EVENT_NO = BB.EVENT_NO
+			WHERE AA.EVENT_BEGIN_DT <![CDATA[ <= ]]> SYSDATE()
+			AND AA.EVENT_END_DT <![CDATA[ >= ]]> SYSDATE()
+			<if test="@egovframework.com.cmm.util.EgovMybaitsUtil@isNotEmpty(prtnrId)">
+				AND AA.PRTNR_ID = #{prtnrId}
+			</if>
+			AND AA.END_AT = 'N'
+			)
+			THEN 'Y'
+			ELSE 'N'
+			END AS EVENT_AT
+			,gi.GOODS_LRGE_IMAGE_PATH
+		FROM STN_SALES A
+		JOIN STN_GOODS B ON A.GOODS_ID = B.GOODS_ID
+		JOIN STN_PRTNR_CMPNY_MAPNG D ON B.PCMAPNG_ID = D.PCMAPNG_ID
+		JOIN STN_CMPNY C ON D.CMPNY_ID = C.CMPNY_ID
+		LEFT JOIN	STN_GOODS_IMAGE gi ON gi.GOODS_ID  = B.GOODS_ID AND gi.GOODS_IMAGE_SE_CODE = 'GNR' AND gi.GOODS_IMAGE_NO = (SELECT MIN(GOODS_IMAGE_NO) FROM STN_GOODS_IMAGE WHERE GOODS_ID = B.GOODS_ID AND GOODS_IMAGE_SE_CODE = 'GNR')
+		WHERE A.PRTNR_ID = #{prtnrId}
+		AND A.TYPE_CODE = #{typeCode}
+		ORDER BY A.EXPSR_ORDR
+	</select>
+
+	<sql id="selectSaleGoodsListWhere">
+		WHERE	 B.USE_AT = 'Y'
+		AND B.SOLD_OUT_AT = 'N'
+		AND B.REGIST_STTUS_CODE ='C'
+		<!--<if test="@egovframework.com.cmm.util.EgovMybaitsUtil@isNotEmpty(searchPrtnrId)">
+			AND pcm.PRTNR_ID = #{searchPrtnrId}
+		</if>-->
+		<if test="@egovframework.com.cmm.util.EgovMybaitsUtil@isNotEmpty(searchGoodsExpsrCode)">
+			<choose>
+				<when test="@egovframework.com.cmm.util.EgovMybaitsUtil@isEquals(searchGoodsExpsrCode, 'ALL')">
+					AND g.GOODS_EXPSR_CODE = 'ALL'
+				</when>
+				<when test="@egovframework.com.cmm.util.EgovMybaitsUtil@isEquals(searchGoodsExpsrCode, 'PRVUSE')">
+					AND g.GOODS_EXPSR_CODE = 'PRVUSE'
+				</when>
+				<when test="@egovframework.com.cmm.util.EgovMybaitsUtil@isEquals(searchGoodsExpsrCode, 'SBS')">
+					AND g.GOODS_EXPSR_CODE IN ('SBS','ALL')
+				</when>
+				<when test="@egovframework.com.cmm.util.EgovMybaitsUtil@isEquals(searchGoodsExpsrCode, 'GNRL')">
+					AND g.GOODS_EXPSR_CODE IN ('GNRL','ALL')
+				</when>
+			</choose>
+		</if>
+	</sql>
+</mapper>

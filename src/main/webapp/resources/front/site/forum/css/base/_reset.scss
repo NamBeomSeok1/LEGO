@@ -1,0 +1,135 @@
+html, body {
+    height: 100%;
+}
+html {
+    border: 0;
+    outline: 0;
+    font-size: 62.5%;
+}
+body {
+    font-size: $fs;
+    line-height: 1.33;
+    font-family: "Spoqa Han Sans Neo", "맑은고딕", "Malgun Gothic", "Apple Gothic",  Dotum,  Gulim, sans-serif;
+    background-color: transparent;
+    color: $bk;
+    font-weight: $r;
+    letter-spacing: -0.025em;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: none;
+    width:100%;
+}
+body.noscroll {
+    overflow: hidden;
+}
+::selection {
+    color: #fff;
+    background-color: #273640;
+}
+::-moz-selection {
+    color: #fff;
+    background-color: #273640;
+}
+
+html, body, nav, section, article, figure, figcaption,
+h1, h2, h3, h4, h5, h6,
+menu, ul, ol, dl, li, dt, dd,
+p, form {
+    margin: 0;
+    padding: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight:$b;
+    line-height: 1.1em;
+}
+img {
+    margin: 0;
+    border: none;
+}
+ul, ol, dl, li {
+    list-style: none;
+}
+cite, em, address {
+    font-style: normal;
+}
+em {
+	font-weight:$b;
+	color: $spot;
+	&.spot {
+		color: $spot;
+	}
+	&.spot2 {
+		color: $spot2;
+	}
+}
+em
+b, strong {
+    font-weight: $exb;
+}
+i {
+	font-style:normal;
+}
+iframe {
+    border: none;
+    outline: 0;
+}
+a > span {
+    cursor: pointer;
+}
+a {
+    text-decoration: none;
+    color: $bk;
+}
+a:hover,
+a:focus {
+    text-decoration: none;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+table caption {
+    height: 0;
+    font-size: 0.1em;
+    color: #fff;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+fieldset legend {
+    opacity: 0;
+    filter: alpha(opacity=0);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    font-size: 0;
+    line-height: 0;
+}
+button,
+input:not([type=checkbox]),
+input:not([type=radio]) ,
+textarea,
+select {
+    font-family: "Spoqa Han Sans Neo", "맑은고딕", "Malgun Gothic", "Apple Gothic",  Dotum,  Gulim, sans-serif;
+    font-size:16px;
+    color: $bk;
+	-webkit-appearance: none;
+	-webkit-border-radius: 0;
+	vertical-align: middle;
+}
+button {
+    border: none;
+    background: none;
+    cursor:pointer;
+}
+pre {
+	 white-space: pre-wrap;
+}

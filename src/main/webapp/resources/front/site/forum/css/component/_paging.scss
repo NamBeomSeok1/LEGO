@@ -1,0 +1,129 @@
+
+/* -------------------------------------------------
+	 COMMON element
+------------------------------------------------- */
+/* paging */
+.paging {
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	margin: 40px auto;
+	overflow: hidden;
+	text-align: center;
+	li {
+		display: inline-block;
+		vertical-align: middle;
+	}
+	a {
+		position: relative;
+		display: block;
+		color:$gr300;
+		width: 40px;
+		height: 40px;
+		line-height: 38px;
+		&:hover,
+		&:focus {
+			color:$bk;
+		}
+	}
+	.pv {
+		margin-right: 8px;
+	}
+	.fw {
+		margin-left: 8px;
+	}
+	.txt-hide {
+		position: static;
+		text-indent: -9999px;
+		color: #fff;
+		font-size: 0;
+	}
+}
+.paging li.ppv a span:before,
+.paging li.ffw a span:before,
+.paging li.ppv a span:after,
+.paging li.ffw a span:after,
+.paging li.pv a span:before,
+.paging li.fw a span:before {
+	content: "";
+	position: absolute;
+	display: block;
+	width: 8px;
+	height: 8px;
+	box-sizing: border-box;
+	border-top: 2px solid $gr300;
+	border-left: 2px solid $gr300;
+	margin-top:-1px;
+    top:50%;
+    left:50%;
+    transform-origin:left top;
+}
+.paging li.pv a span:before,
+.paging li.ppv a span:before,
+.paging li.ppv a span:after {
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+.paging li.fw a span:before,
+.paging li.ffw a span:before,
+.paging li.ffw a span:after {
+	-webkit-transform: rotate(135deg);
+	-moz-transform: rotate(135deg);
+	-ms-transform: rotate(135deg);
+	transform: rotate(135deg);
+}
+.paging li.pv a span:before {
+	margin-left:-4px;
+}
+.paging li.fw a span:before {
+	margin-left: 4px;
+}
+.paging li.ppv a span:before {
+	margin-left:-8px;
+}
+.paging li.ppv a span:after {
+	margin-left:0;
+}
+.paging li.ffw a span:before {
+	margin-left: 0;
+}
+.paging li.ffw a span:after {
+	margin-left: 8px;
+}
+.paging li.disabled a,
+.paging li.disabled a:hover,
+.paging li.disabled a:focus {
+	background-position: 0 0;
+}
+.paging li a:hover,
+.paging li a:focus {
+	color: $bk;
+}
+.paging li.ppv a:hover span:before, .paging li.ppv a:focus:before,
+.paging li.ffw a:hover span:before, .paging li.ffw a:focus:before,
+.paging li.ppv a:hover span:after, .paging li.ppv a:focus:after,
+.paging li.ffw a:hover span:after, .paging li.ffw a:focus:after,
+.paging li.pv a:hover span:before, .paging li.pv a:focus:before,
+.paging li.fw a:hover span:before, .paging li.fw a:focus:before {
+	border-color:$bk;
+}
+.paging li.is-active a,
+.paging li.is-active a:hover,
+.paging li.is-active a:focus {
+	color: $spot;
+	font-weight: $b;
+	border-color: $spot;
+}
+/* -------------------------------------------------    
+	- TABLET
+------------------------------------------------- */
+@include tablet {
+}
+
+/* -------------------------------------------------    
+	- mobile
+------------------------------------------------- */
+@include mobile {
+}

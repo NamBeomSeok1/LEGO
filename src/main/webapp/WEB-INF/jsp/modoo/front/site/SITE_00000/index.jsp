@@ -1,0 +1,474 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jsp/modoo/common/commonTagLibs.jsp"%>
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<title>DX 교육데이터협회</title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="Author" content="">
+	<meta name="Keywords" content="">
+	<meta name="Description" content="">
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport"
+		  content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<link href="${CTX_ROOT}/resources/front/site/forum/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="mn-contents">
+    <section class="mn-visual">
+        <div class="wrap">
+            <div class="txt-area">
+                <h2><em>D</em>igital Transformation for <em>X</em>(Everything)</h2>
+                <figure>
+                    <img src="../../../resources/front/site/forum/image/main/img_visual.svg" class="">
+                </figure>
+                <p>미래교육을 위한 <strong>디지털 대전환</strong></p>
+            </div>
+        </div>
+        <a href="#mnInfo" class="btn-scroll"><span>scroll down</span></a>
+    </section>
+    <section class="mn-section mn-info" id="mnInfo">
+        <div class="bg-area">
+            <figure>
+                <img src="../../../resources/front/site/forum/image/main/bg_obj1.gif" class="obj1">
+                <img src="../../../resources/front/site/forum/image/main/bg_obj2.svg" class="obj2">
+            </figure>
+        </div>
+        <div class="wrap">
+            <div class="tit-area">
+                <h2 class="tit-lg">제 1회 Future Education AI Forum 2022</h2>
+            </div>
+            <div class="mn-cont">
+                <div class="img-area">
+                    <figure>
+                        <img src="../../../resources/front/site/forum/image/poster/poster.jpg" alt="">
+                    </figure>
+                </div>
+                <div class="txt-area">
+                    <ul>
+                        <li>
+                            <cite>일시</cite>
+                            <div class="txt">
+                                2022. 11. 7(월) 13:30 ~ 16:30<br />
+                                - 1부 : 13:30~15:00<br />
+                                - 2부 : 15:20~16:30
+                            </div>
+                        </li>
+                        <li>
+                            <cite>장소</cite>
+                            <div class="txt">서울대학교 관악캠퍼스 문화관( 73동) 중강당</div>
+                        </li>
+                        <li>
+                            <cite>주제</cite>
+                            <div class="txt">교육 데이터와 미래교육</div>
+                        </li>
+                        <li>
+                            <cite>운영방식</cite>
+                            <div class="txt">오프라인 행사(서울대) 및 Youtube 온라인 생중계</div>
+                        </li>
+                        <li>
+                            <cite>진행언어</cite>
+                            <div class="txt">영어(한국어 동시통역)</div>
+                        </li>
+                        <li>
+                            <cite>주최</cite>
+                            <div class="txt">
+                                <figure>
+                                    <img src="../../../resources/front/site/forum/image/common/logo_gne.svg"
+                                         alt="경상남도교육청">
+                                    <img src="../../../resources/front/site/forum/image/common/logo_sen.svg"
+                                         alt="서울특별시교육청">
+                                    <img src="../../../resources/front/site/forum/image/common/logo_snu.svg"
+                                         alt="서울대학교 사범대학">
+                                </figure>
+                            </div>
+                        </li>
+                        <li>
+                            <cite>주관</cite>
+                            <div class="txt">
+                                <img src="../../../resources/front/site/forum/image/logo/logo.svg"
+                                     alt="DX 교육데이터협회">
+                            </div>
+                        </li>
+                        <li>
+                            <cite>후원</cite>
+                            <div class="txt">
+                                <figure>
+                                    <img src="../../../resources/front/site/forum/image/footer/fsite_dataeum.svg"
+                                         alt="데이타이음" style="padding-top: 0.5em;">
+                                    <img src="../../../resources/front/site/forum/image/common/logo_dell.svg"
+                                         alt="DELL">
+                                    <img src="../../../resources/front/site/forum/image/common/logo_intel.svg"
+                                         alt="인텔">
+                                    <img src="../../../resources/front/site/forum/image/common/logo_dmoa.svg"
+                                         alt="디모아">
+                                    <img src="../../../resources/front/site/forum/image/common/logo_kakao.svg"
+                                         alt="카카오엔터프라이즈">
+                                    <img src="../../../resources/front/site/forum/image/common/logo_uniwide.svg"
+                                         alt="유니와이드">
+                                </figure>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="mn-section mn-program">
+        <div class="wrap">
+            <div class="tit-area">
+                <h2 class="tit-lg">프로그램 소개</h2>
+            </div>
+            <div class="mn-cont">
+
+                <div class="program">
+                    <div class="tit-area">
+                        <h3 class="tit">인사말씀</h3>
+                    </div>
+                    <table>
+                        <caption>인사말씀</caption>
+                        <colgroup>
+                            <col style="width:320px;">
+                            <col>
+                        </colgroup>
+                        <tbody>
+                        <tr>
+                            <th scope="row">
+                                13:30~13:40
+                            </th>
+                            <td>
+                                박종훈 경상남도 교육감<br>
+                                조희연 서울특별시 교육감<br>
+                                강준호 서울대학교 사범대 학장
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="program">
+                    <div class="tit-area">
+                        <h3 class="tit">1부</h3>
+                        <p class="fc-lg">교육빅데이터와 인공지능 학술연구 발표</p>
+                    </div>
+                    <table>
+                        <caption>1부 교육빅데이터와 인공지능 학술연구 발표</caption>
+                        <colgroup>
+                            <col style="width:320px;">
+                            <col>
+                        </colgroup>
+                        <tbody>
+                        <tr>
+                            <th scope="row">
+                                13:40~14:30
+                            </th>
+                            <td>
+                                <strong>학술연구 발표 : Big Data in Modern Education</strong>
+                                - Jae H. Paik San Francisco State University<br>
+                                - Igor Himelfarb Lincoln University
+                                <small>※ 영어 발표: 영-한 동시통역 진행</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">14:30~15:00</th>
+                            <td>
+                                <strong>토론 : 교육데이터와 미래교육</strong>
+                                - 좌 장: 임철일 서울대학교 교수<br>
+                                <p style="padding-left: 3.65em; text-indent:-3.65em;">
+                                    - 토론자: 박종훈 경상남도 교육감, 백미원 서울특별시교육청교육연구정보원장,<br>
+                                    강준호 사범대 학장, 임완철 경상국립대학교 교수
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="ac">
+                                <strong>휴식</strong>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="program">
+                    <div class="tit-area">
+                        <h3 class="tit">2부</h3>
+                        <p class="fs-lg">교육데이터 구축 사례 및 AI 학습의 기술적 전망</p>
+                    </div>
+                    <table>
+                        <caption>2부 교육데이터 구축 사례 및 AI 학습의 기술적 전망</caption>
+                        <colgroup>
+                            <col style="width:320px;">
+                            <col>
+                        </colgroup>
+                        <tbody>
+                        <tr>
+                            <th scope="row">15:20~15:35</th>
+                            <td>
+                                <strong>교육 데이터 모델 구축 및 성과 소개</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">15:35~16:15</th>
+                            <td>
+                                <strong>교육분야 인공지능 활용에 대한 기술적 전망</strong>
+                                <p>- 카카오엔터프라이즈, intel, aws</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">16:15~16:25</th>
+                            <td>
+                                <strong>질의응답</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">16:25~16:30</th>
+                            <td>
+                                <strong>폐회식</strong>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="mn-section mn-lecturer">
+        <div class="bg-area">
+            <figure>
+                <img src="../../../resources/front/site/forum/image/main/bg_obj3.svg" class="obj3">
+                <img src="../../../resources/front/site/forum/image/main/bg_obj4.svg" class="obj4">
+            </figure>
+        </div>
+        <div class="wrap">
+            <div class="tit-area">
+                <h2 class="tit-lg">Future Education AI Forum 2022 1부</h2>
+            </div>
+            <div class="mn-cont">
+                <div class="lecturer-box">
+                    <cite>13:40~14:30</cite>
+                    <div class="lecturer-tit-area">
+                        <h3>교육빅데이터와 인공지능 학술연구 발표</h3>
+                        <p>‘Big Data in Modern Education’</p>
+                    </div>
+                    <ul class="lecturer-list">
+                        <li>
+                            <div class="img-area">
+                                <figure>
+                                    <img src="../../../resources/front/site/forum/image/lecturer/lecturer1_1_1.jpg"
+                                         alt="">
+                                </figure>
+                            </div>
+                            <div class="txt-area">
+                                <cite>Jae H. Paik</cite>
+                                <p>San Francisco State University 교수</p>
+                                <small>Professor, Department of Psychology
+                                    San Francisco State University, CA</small>
+                                <ul class="bullet">
+                                    <li>
+                                        <strong>Present</strong>
+                                        Concentration Coordinator, M.A. in Developmental Psychology
+                                        San Francisco State University, CA
+                                    </li>
+                                    <li>
+                                        <strong>Present</strong>
+                                        Director, The Global Classroom San Francisco State University, CA
+                                    </li>
+                                    <li>
+                                        <strong>Present</strong>
+                                        Program Director, Psychology Faculty-Led Study Abroad Program
+                                        International
+                                        Service Learning Program San Francisco State University, CA
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="img-area">
+                                <figure>
+                                    <img src="../../../resources/front/site/forum/image/lecturer/lecturer1_1_2.jpg"
+                                         alt="">
+                                </figure>
+                            </div>
+                            <div class="txt-area">
+                                <cite>Igor Himelfarb</cite>
+                                <p>Lincoln University 교수</p>
+                                <small>Associate Professor of Business Administration
+                                    Lincoln University California, Oakland, CA</small>
+                                <ul class="bullet">
+                                    <li>
+                                        <strong>Present</strong>
+                                        Chief Methodologist and Lead Statistician. Multicultural Insights.
+                                    </li>
+                                    <li>
+                                        <strong>Present</strong>
+                                        Director, Department of Psychometrics and Research; Psychometrician
+                                        National
+                                        Board of Chiropractic Examiners. Greeley, Colorado.
+                                    </li>
+                                    <li>
+                                        <strong>Present</strong>
+                                        Associate Professor of Business Administration. Lincoln University
+                                        California,
+                                        Oakland, CA
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="lecturer-box">
+                    <cite>14:30~15:00</cite>
+                    <div class="lecturer-tit-area">
+                        <h3>전문가 학술 토론</h3>
+                        <p>교육데이터와 미래교육</p>
+                    </div>
+                    <ul class="lecturer-col-list">
+                        <li>
+                            <cite>좌장</cite>
+                            <ul class="">
+                                <li>
+                                    <figure>
+                                        <img src="../../../resources/front/site/forum/image/lecturer/lecturer1_2_1.jpg" alt="">
+                                    </figure>
+                                    <p>임철일 서울대학교 교수</p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <cite>토론자</cite>
+                            <ul class="">
+                                <li>
+                                    <figure>
+                                        <img src="../../../resources/front/site/forum/image/lecturer/lecturer1_2_2.jpg" alt="">
+                                    </figure>
+                                    <p>박종훈 경상남도 교육감</p>
+                                </li>
+                                <li>
+                                    <figure>
+                                        <img src="../../../resources/front/site/forum/image/lecturer/lecturer1_2_3.jpg" alt="">
+                                    </figure>
+                                    <p style="font-size: 0.9em;">백미원 서울특별시교육청 교육연구정보원장</p>
+                                </li>
+                                <li>
+                                    <figure>
+                                        <img src="../../../resources/front/site/forum/image/lecturer/lecturer1_2_4.jpg" alt="">
+                                    </figure>
+                                    <p>강준호 서울대학교 사범대 학장</p>
+                                </li>
+                                <li>
+                                    <figure>
+                                        <img src="../../../resources/front/site/forum/image/lecturer/lecturer1_2_5.jpg" alt="">
+                                    </figure>
+                                    <p>임완철 경상국립대학교 교수</p>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="mn-section mn-lecturer">
+        <div class="wrap">
+            <div class="tit-area">
+                <h2 class="tit-lg">Future Education AI Forum 2022 2부</h2>
+            </div>
+            <div class="mn-cont">
+                <div class="lecturer-box">
+                    <cite>15:20~15:35</cite>
+                    <div class="lecturer-tit-area">
+                        <h3>교육 데이터 모델 구축 및 성과 소개</h3>
+                    </div>
+                    <div class="img-area">
+                        <figure>
+                            <img src="../../../resources/front/site/forum/image/common/logo_dataeum.svg" alt="데이타이음" style="height:50px">
+                        </figure>
+                    </div>
+                </div>
+                <div class="lecturer-box">
+                    <cite>15:35~16:15</cite>
+                    <div class="lecturer-tit-area">
+                        <h3>교육분야 인공지능 활용에 대한 기술적 전망</h3>
+                    </div>
+                    <div class="img-area">
+                        <figure>
+                            <img src="../../../resources/front/site/forum/image/common/logo_kakao_w.svg" alt="카카오엔터프라이즈">
+                            <img src="../../../resources/front/site/forum/image/common/logo_intel_w.svg" alt="인텔">
+                            <img src="../../../resources/front/site/forum/image/common/logo_aws_w.svg" alt="AWS" style="height: 36px;">
+                        </figure>
+                    </div>
+                </div>
+                <div class="lecturer-box">
+                    <cite>16:15~16:25</cite>
+                    <div class="lecturer-tit-area">
+                        <h3>질의응답</h3>
+                    </div>
+                </div>
+                <div class="lecturer-box">
+                    <cite>16:25~16:30</cite>
+                    <div class="lecturer-tit-area">
+                        <h3>폐회식</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="mn-section mn-location">
+        <div class="wrap">
+            <div class="mn-cont">
+                <div class="txt-area">
+                    <div class="tit-area">
+                        <h2 class="tit-lg">포럼 위치 안내</h2>
+                    </div>
+                    <ul>
+                        <li>
+                            <cite>주소</cite>
+                            <div class="txt">서울대학교 관악캠퍼스 문화관(73동) 중강당</div>
+                        </li>
+                        <li>
+                            <cite>대중교통</cite>
+                            <div class="txt">
+                                <p> 2호선 서울대입구역 하차,<br />
+                                    [5513] [5516] 버스 법대, 사회대 입구 하차 도보 6분</p>
+                                <p>
+                                    신림선 관악산역 하차,<br />
+                                    [5516] 버스 법대, 사회대 입구 하차 도보 6분
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                    <small>※ 행사 당일 주차장이 혼잡할 수 있어 대중교통 이용을 추천 드립니다.</small>
+                    <a href="https://map.kakao.com/?from=roughmap&eName=%EA%B3%B5%EC%A4%91%EC%A0%84%ED%99%94%20%EC%84%9C%EC%9A%B8%EB%8C%80%20%EB%AC%B8%ED%99%94%EA%B4%80%EC%95%9E%2073%EB%8F%99&eX=489153.0&eY=1100523.0" target="_blank" class="btn-lg">내 위치에서 길찾기</a>
+                </div>
+                <div class="map-area">
+                    <div id="daumRoughmapContainer1666152982070"
+                         class="root_daum_roughmap root_daum_roughmap_landing"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- <section class="mn-section">
+        <div class="wrap">
+            <div class="tit-lg-area">
+                <h2 class="tit-lg wh"></h2>
+                <p></p>
+            </div>
+            <div class="mn-cont"></div>
+        </div>
+    </section> -->
+</div>
+    <a href="#" class="btn-top"><span class="txt-hide">TOP</span></a>
+
+
+<!--퍼블 layout-->
+<javascript>
+	<%--<script src="${CTX_ROOT}/resources/front/site/forum/js/_layout.js"></script>--%>
+
+	</script>
+</javascript>
+</body>
+
+</html>

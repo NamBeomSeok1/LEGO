@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="40" viewBox="0 0 120 40">
+  <g id="그룹_462" data-name="그룹 462" transform="translate(-843 -900)">
+    <g id="그룹_461" data-name="그룹 461" transform="translate(58)">
+      <rect id="사각형_44" data-name="사각형 44" width="40" height="40" transform="translate(865 900)" fill="#333"/>
+      <path id="Icon_ionic-ios-close" data-name="Icon ionic-ios-close" d="M16.182,14.524l5-5a1.172,1.172,0,0,0-1.657-1.657l-5,5-5-5A1.172,1.172,0,1,0,7.868,9.524l5,5-5,5a1.172,1.172,0,0,0,1.657,1.657l5-5,5,5a1.172,1.172,0,1,0,1.657-1.657Z" transform="translate(870.477 905.476)" fill="#fff"/>
+    </g>
+    <g id="그룹_459" data-name="그룹 459" transform="translate(18)">
+      <rect id="사각형_44-2" data-name="사각형 44" width="40" height="40" transform="translate(865 900)" fill="#333"/>
+      <path id="패스_21798" data-name="패스 21798" d="M1299.2,484.321l6,6-6,6" transform="translate(-417.197 429.679)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"/>
+    </g>
+    <g id="그룹_460" data-name="그룹 460" transform="translate(843 900)">
+      <rect id="사각형_44-3" data-name="사각형 44" width="40" height="40" fill="#333"/>
+      <path id="패스_21798-2" data-name="패스 21798" d="M1305.2,484.321l-6,6,6,6" transform="translate(-1282.196 -470.321)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"/>
+    </g>
+  </g>
+</svg>

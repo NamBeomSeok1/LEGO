@@ -1,0 +1,39 @@
+/* label */
+.label-area {
+	display:flex;
+	flex-wrap: wrap;
+	gap:4px;
+}
+.label {
+	display: inline-block;
+	height: 32px;
+	line-height: 32px;
+	box-sizing: border-box;
+	color:$gr300;
+	background-color: $gr50;
+	padding: 0 12px;
+	font-size: $fs-sm;
+	vertical-align: middle;
+
+	&.spot {
+		background-color: $spot;
+		color: #fff;
+	}
+
+	&.spot2 {
+		background-color: $spot2;
+		border-color: $spot2;
+		color: #fff;
+	}
+}
+/* -------------------------------------------------    
+	- mobile
+------------------------------------------------- */
+@include mobile {
+	.label {
+		height: 24px;
+		line-height: 24px;
+		font-size: 12px;
+		padding:0 8px;
+	}
+}

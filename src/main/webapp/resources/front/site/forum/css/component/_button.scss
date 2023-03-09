@@ -1,0 +1,179 @@
+.btn-cont {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 8px;
+	text-align: center;
+	margin-top: 30px;
+	margin-bottom: 100px;
+	&.al {
+		justify-content: flex-start;
+	}
+	&.ar {
+		justify-content: flex-end;
+	}
+}
+
+.btn,
+.btn-sm,
+.btn-lg {
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	box-sizing: border-box;
+	overflow: hidden;
+	-webkit-transition-duration: 0.3s;
+	transition-duration: 0.3s;
+	-webkit-transition-property: color, background-color;
+	transition-property: color, background-color;
+	font-weight: $b;
+}
+
+.btn {
+	padding: 0 16px;
+	height: 40px;
+	line-height: 38px;
+	font-size: 14px;
+}
+
+.btn-sm {
+	padding: 0 12px;
+	height: 32px;
+	line-height: 30px;
+	font-size: 12px;
+}
+
+.btn-lg {
+	padding: 0 32px;
+	height: 56px;
+	line-height: 54px;
+	font-size:16px;
+}
+
+.btn-xlg {
+	padding: 0 32px;
+	height: 72px;
+	line-height: 70px;
+	font-size:18px;
+}
+
+/* btn : default */
+.btn,
+.btn-sm,
+.btn-lg,
+.btn-xlg  {
+	background-color: $wh;
+	border: 1px solid $spot;
+	color: $spot;
+
+	&:hover,
+	&:focus {
+		border-color: $spot-hover;
+		color:$spot-hover;
+	}
+
+	&:disabled {
+		opacity: .5;
+		pointer-events: none;
+	}
+}
+
+/* btn : spot */
+.btn.spot,
+.btn-sm.spot,
+.btn-lg.spot,
+.btn-xlg.spot {
+	background-color: $spot;
+	border-color: $spot;
+	color:#fff;
+
+	&:hover,
+	&:focus {
+		background-color: $spot-hover;
+	}
+}
+
+/* btn : spot2 */
+.btn.spot2,
+.btn-sm.spot2,
+.btn-lg.spot2,
+.btn-xlg.spot2 {
+	background-color: $spot2;
+	border-color: $spot2;
+	color: #fff;
+
+	&:hover,
+	&:focus {
+		color: #fff;
+		border-color: $spot2-hover;
+		background-color: $spot2-hover;
+	}
+}
+
+/* btn : spot3 */
+.btn.spot3,
+.btn-sm.spot3,
+.btn-lg.spot3,
+.btn-xlg.spot3 {
+	border-color: $rd;
+	color:$rd;
+
+	&:hover,
+	&:focus {
+		background-color: rgba($rd, 0.05);
+	}
+}
+
+.btn-top {
+	display: none;
+	position: fixed;
+	right:20px;
+	bottom:20px;	
+	width: 48px;
+	height: 48px;
+	border-radius: $radius;
+	background: url($url-img + 'common/ico_top.svg') center center no-repeat $spot;
+	&.is-sticky {
+		display: block;
+	}
+}
+/* -------------------------------------------------    
+	- TABLET
+------------------------------------------------- */
+@include tablet {}
+
+/* -------------------------------------------------    
+	- mobile
+------------------------------------------------- */
+@include mobile {
+	// .btn {
+	// 	padding: 0 30px;
+	// 	height: 50px;
+	// 	line-height: 48px;
+	// 	font-size: 1.6rem;
+	// }
+
+	// .btn-sm {
+	// 	padding: 0 20px;
+	// 	height: 36px;
+	// 	line-height: 34px;
+	// 	font-size: 1.4rem;
+	// 	min-width: 80px;
+	// }
+
+	.btn-xlg {
+		padding: 0 20px;
+		min-width: 120px;
+		font-size: 16px;
+		height: 50px;
+		line-height: 48px;
+	}
+	.btn-top {
+		right:16px;
+		bottom:16px;	
+		width: 30px;
+		height: 30px;
+		background-size: 12px 12px;
+	}
+}

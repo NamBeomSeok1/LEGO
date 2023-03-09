@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title>DX 교육데이터협회 ADNIN</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+
+    <style>
+        html,
+        body {
+            padding: 0;
+            margin:0;
+            height: 100%;
+            background-color: #f8f8f8;
+        }
+        .table {
+            display: flex;
+            height: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .login {
+            background-color: #fff;
+            padding: 80px;
+        }
+        .login form input {
+            display: block;
+            padding: 0 8px;
+            min-width: 240px;
+            height: 36px;
+            border: 1px solid #ddd;
+            margin-bottom: 8px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .login .btn {
+            display: inline-block;
+            border: 1px solid #333;
+            background-color: transparent;
+            text-decoration: none;
+            font-size: 14px;
+            line-height: 38px;
+            padding: 0 16px;
+            color: #333;
+            text-align: center;
+            flex: 1;
+        }
+        .login .btn.spot {
+            background-color: #14BDFF;
+            color: #fff;
+            font-weight: 700;
+            border: 1px solid #14BDFF;
+        }
+        .login .logo {
+            display: block;
+            margin-bottom: 32px;
+        }
+        .btn-area {
+            display: flex;
+            flex: 1;
+            gap: 4px;
+            margin-top: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-gr table">
+        <section class="login">
+            <div class="login-wrap">
+                <figure>
+                    <img src="http://dx-data.com/resources/front/site/forum/image/logo/logo.svg" class="logo">
+                </figure>
+                <form name="loginForm" method="post" action="/user/sign/actionLogin.do">
+                    <input type="hidden" name="refUrl" value="">
+                    <input type="text" name="id" value="" placeholder="아이디">
+                    <input type="password" name="password" value="" autocomplete="one-time-code" placeholder="비밀번호">
+                    
+                    <div class="btn-area">
+                        <a href="/index.do" class="btn">취소</a>
+                        <button type="submit" class="btn spot">로그인</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

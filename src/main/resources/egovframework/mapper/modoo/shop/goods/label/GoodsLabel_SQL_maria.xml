@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="modoo.module.shop.goods.label.service.impl.GoodsLabelMapper">
+
+	<!-- 라벨 목록 -->
+	<select id="selectGoodsLabelList" parameterType="modoo.module.shop.goods.label.service.GoodsLabelVO" resultType="modoo.module.shop.goods.label.service.GoodsLabelVO">
+		SELECT
+			sgl.GOODS_ID
+			,sgl.LABEL_SN
+			,sgl.LABEL_CN
+			,sgl.LABEL_CN_2
+			,sgl.LABEL_MAIN_CHK
+			,sgl.LABEL_TY
+			,sgl.LABEL_COLOR
+			,sgl.LABEL_IMG_PATH
+		FROM	STN_GOODS_LABEL sgl
+		JOIN	STN_GOODS g ON g.GOODS_ID = sgl.GOODS_ID AND g.USE_AT = 'Y'
+		WHERE	sgl.GOODS_ID = #{goodsId}
+		ORDER BY sgl.LABEL_SN ASC
+	</select>
+
+
+	<!-- 라벨 -->
+	<select id="selectGoodsLabel" parameterType="modoo.module.shop.goods.label.service.GoodsLabelVO" resultType="modoo.module.shop.goods.label.service.GoodsLabelVO">
+		SELECT
+			sgl.GOODS_ID
+			 ,sgl.LABEL_SN
+			 ,sgl.LABEL_CN
+			 ,sgl.LABEL_CN_2
+			 ,sgl.LABEL_MAIN_CHK
+			 ,sgl.LABEL_TY
+			 ,sgl.LABEL_COLOR
+			 ,sgl.LABEL_IMG_PATH
+		FROM	STN_GOODS_LABEL sgl
+					JOIN	STN_GOODS g ON g.GOODS_ID = sgl.GOODS_ID AND g.USE_AT = 'Y'
+		WHERE	sgl.GOODS_ID = #{goodsId}
+		AND 	sgl.LABEL_SN = #{labelSn}
+	</select>
+
+
+
+	<!-- 추천상품 저장 -->
+	<insert id="insertGoodsLabel" parameterType="modoo.module.shop.goods.label.service.GoodsLabelVO">
+		INSERT INTO STN_GOODS_LABEL (
+			 GOODS_ID
+			,LABEL_SN
+			,LABEL_CN
+			,LABEL_CN_2
+			,LABEL_MAIN_CHK
+			,LABEL_TY
+			,LABEL_COLOR
+			,LABEL_IMG_PATH
+		) VALUES (
+			 #{goodsId}
+			 ,#{labelSn}
+			 ,#{labelCn}
+			 ,#{labelCn2}
+			 ,#{labelMainChk}
+			 ,#{labelTy}
+			 ,#{labelColor}
+			 ,#{labelImgPath}
+		)
+	</insert>
+	
+
+	<!-- 추천상품 삭제 -->
+	<delete id="deleteGoodsLabel" parameterType="modoo.module.shop.goods.label.service.GoodsLabelVO">
+		DELETE FROM STN_GOODS_LABEL
+		WHERE
+			GOODS_ID = #{goodsId}
+		<if test="labelSn != null">
+			AND LABEL_SN = #{labelSn}
+		</if>
+	</delete>
+
+</mapper>

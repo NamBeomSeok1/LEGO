@@ -1,0 +1,65 @@
+$ico-size: 24px;
+$ico-col: 20;
+$ico-size-sm:16px;
+// $icon-list:(
+//     'sch', 'user', 'like', 'filter', 'down', 'lock', 'newwin', 'cal', 'edit', 'link', 'share', 'zoom', 'file', 'login', 'logout', 'plus', 'minus', 'trash', 'close', 'menu',
+//     'move','etc'
+// );
+[class^=ico-],
+[class^=ico-sm] {
+    position:relative;
+	display:inline-block;
+	vertical-align:middle;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+[class^=ico-] {
+	width: $ico-size;
+    height: $ico-size;
+	// background-image:url($url-img + 'common/ico24x24.svg');
+    // background-size:$ico-size * $ico-col auto;
+}
+[class^=ico-sm] {
+	width: $ico-size-sm;
+	height: $ico-size-sm;
+	// background-image:url($url-img + 'common/ico16x16.svg');
+    // background-size:$ico-size-sm * $ico-col auto;
+}
+// .ico{
+//      @each $icon in $icon-list{
+//         $i: index($icon-list, $icon) -  1;
+//         $x: ($i % $ico-col) * -$ico-size;
+//         $y: floor(math.div($i, $ico-col)) * -$ico-size;
+//         &-#{$icon}{background-position:#{$x $y};}
+//     }
+// }
+// .ico-sm {
+// 	@each $icon in $icon-list {
+//         $i: index($icon-list, $icon) -  1;
+//         $x: ($i % $ico-col) * -$ico-size-sm;
+//         // $y: math.floor($i / $ico-col) * -$ico-size-sm;
+//         $y: floor(math.div($i, $ico-col)) * -$ico-size-sm;
+//         &-#{$icon}{background-position:#{$x $y};}
+//     }
+// }
+[class^=ico-].back {
+	margin-left:7px;
+}
+.ico-down {
+    background-image:url($url-img + 'common/ico_down.svg');
+}
+.btn-xlg i {
+    margin-right:13px;
+}
+/* -------------------------------------------------    
+	- TABLET
+------------------------------------------------- */
+@include tablet {
+}
+
+/* -------------------------------------------------    
+	- mobile
+------------------------------------------------- */
+@include mobile {
+
+}

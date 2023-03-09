@@ -1,0 +1,66 @@
+$bk: #333;
+$wh: #fff; 
+
+$gr700 : #555;
+$gr500 : #777;
+$gr300 : #999;
+$gr200 : #ccc;
+$gr100 : #ddd;
+$gr80 : #eee;
+$gr50 : #F8F8F8;
+
+$rd: #EB325D;
+$gn: #00BA7A;
+$bl: #14BDFF;
+$or: #FF9914;
+$bl-dark: #004D88;
+$spot : $bl;
+$spot2 : $bl-dark;
+$spot3: $or;
+
+$bk-hover:darken($bk, 12%);
+$spot-hover:darken($spot, 5%);
+$spot2-hover:darken($spot2, 5%);
+$gr100-hover:darken($gr100, 5%);
+
+$wrap: 1200px;
+$wrap-gap:20px;
+
+$url-img: '../image/';
+$radius:4px;
+$radius-sm:2px;
+$shadow:0 5px 15px rgba(0,0,0,.15);
+$shadow-spot:0 5px 10px rgba(118,13,62,.1);
+
+$exb:900;
+$b:700;
+$m:500;
+$r:400;
+
+$tablet: 1279px;
+$mobile: 767px;
+
+$fs-lg:18px;
+$fs:16px;
+$fs-sm:14px;
+
+
+%thumb-v {
+    figure {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 0;
+        padding-top: 141%;
+        overflow: hidden;
+    }
+    img {
+        position: absolute;
+        top:0;
+        left:0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all .5s;
+    }
+}

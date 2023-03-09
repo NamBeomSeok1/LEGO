@@ -1,0 +1,761 @@
+.mn-section {
+    padding-top:100px;
+    padding-bottom: 100px;
+    position: relative;
+    .tit-area,
+	.mn-cont {
+		opacity: 0;
+		transform: translateY(10%);
+	}
+	&.is-active {
+		.tit-area,
+		.mn-cont {
+			animation: showUp 1s forwards;
+		}
+		.mn-cont {
+			animation-delay: .5s;
+		}
+	}	
+}
+.mn-tit-area {
+    margin-bottom:40px;
+    .mn-tit {
+        position: relative;
+        font-size:40px;
+        padding-left:38px;
+        word-break:keep-all;
+        word-wrap: break-word;
+
+        &::before {
+            content: " ";
+            position: absolute;
+            left:0;
+            top:50%;
+            margin-top:-6px;
+            width: 12px;
+            height: 12px;
+            border-radius:50%;
+            background-color: $spot;
+        }
+    }
+    p {
+        margin-top:16px;
+    }
+}
+
+.mn-visual {
+    position: relative;
+    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
+    word-break: keep-all;
+    &::before {
+        content: " ";
+        position:absolute;
+        width: 100%;
+        height: 100%;
+        background:url($url-img + 'main/bg_visual.svg') center #042d3b;
+        background-size: cover;
+        z-index: -1;
+        animation: visualBg 10s infinite alternate-reverse cubic-bezier(.3,0,.7,1);       
+    }
+    .wrap {
+        height: 100%;
+    }
+    .txt-area {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 50px;
+        padding:120px 0;
+        color:#fff;
+        box-sizing: border-box;
+        cite {
+            font-size:22px;
+            color:$spot;
+            margin-bottom:24px;
+        }
+        h2 {
+            position: relative;
+            display: inline-block;
+            font-size:48px;
+            font-weight: 400;
+            padding-bottom: 24px;
+            line-height: 1.1;
+            em {
+                font-size: 48px;
+            }
+            &::after {
+                content: " ";
+                position: absolute;
+                left:0;
+                right:0;
+                bottom:0;
+                width: 100%;
+                height: 2px;
+                background: rgb(255,255,255);
+                background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 60%, rgba(255,255,255,0) 100%);
+                // background: linear-gradient(100deg, #fff,rgba(255,255,255,0));
+                animation: opacity 3s infinite alternate;
+            }
+        }
+        p {
+            font-size:36px;
+           strong {
+            color:$or;
+           }
+        }
+        figure {
+            img {
+                display: blcok;
+                max-width: 100%;
+            }
+        }
+    }
+}
+.btn-scroll {
+    display: block;
+    position: absolute;
+    z-index: 10;
+    left:50%;
+    bottom:24px;
+    width: 22px;
+    height: 40px;
+    border: 1px solid #fff;
+    background-color: rgba($color:#fff, $alpha:.2);
+    border-radius: 15px;
+    text-indent: -9999px;
+    &::before {
+        content: " ";
+        position: absolute;
+        top:50%;
+        left:50%;
+        margin-top:-2px;
+        margin-left:-2px;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background-color: #fff;
+        animation: scroll 1.5s infinite alternate;
+    } 
+}
+@keyframes visualBg {
+  from {
+    -ms-transform: scale(1,1);
+    transform: scale(1,1);
+  }
+  to {
+    -ms-transform: scale(1.45, 1.45);
+    transform: scale(1.45, 1.45);
+  }
+}
+
+@keyframes scroll {
+    from {
+      top:30%;
+    }
+    to {
+      top:70%;
+    }
+  }
+
+@keyframes opacity {
+    from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+}
+.bg-area {
+    position: absolute;
+    top: 0;
+    left: auto;
+    width: 100vw;
+    height: 100%;
+    z-index: -5;
+}
+
+.mn-info {
+    .bg-area {
+        height: 896px;
+        img {
+            position: absolute;
+        }
+        .obj1 {
+            top: -10%;
+            right: -5%;
+            opacity: .3;
+        }
+        .obj2 {
+            bottom: -20%;
+            left: -10%;
+            animation: opacity 1.5s infinite alternate;
+        }
+    }
+    .mn-cont {
+        display: flex;
+        gap:40px 80px;
+        align-items: center;
+    }
+	.img-area {
+		width: 34%;
+		overflow: hidden;
+		@extend %thumb-v;
+	}
+	.txt-area {
+		flex:1;
+		li {
+            display: flex;
+            gap:8px 16px;
+            margin-bottom:24px;
+            &:last-of-type {
+                margin-bottom:0;
+            }
+            cite {
+                width: 90px;
+                height:34px;
+                line-height:34px;
+                border:1px solid $spot2;
+                color:$spot2;
+                border-radius: 2em;
+                text-align: center;
+                font-weight: $b;
+            }
+            .txt {
+                display: flex;
+                flex:1;
+                align-items: center;
+                color:$gr700;
+                min-height: 34px;
+            }
+        }
+        figure {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            gap: 16px 32px;
+        }
+	}
+}
+
+.mn-program {
+    background-color: $gr50;
+    .program {
+        margin-bottom: 80px;
+        &:last-child {
+            margin-bottom:0;
+        }
+        .tit-area {
+            margin-bottom:24px;
+        }
+        table {
+            border-top:2px solid $bk;
+            border-bottom:1px solid $bk;
+            color:$gr700;
+            th,
+            td {
+                padding:24px 16px;
+                border-bottom:1px solid $gr100;
+            }
+            tbody {
+                th {
+                    border-right:1px dashed $gr100;
+                    font-weight: $r;
+                }
+                td {
+                    height:95px;
+                    box-sizing: border-box;
+                    vertical-align: middle;
+                    word-break: keep-all;
+                    strong {
+                        display: block;
+                        font-size:$fs-lg;
+                        color: $bk;
+                        margin-bottom:4px;
+                    }
+                    small {
+                        display: block;
+                        margin-top:8px;
+                    }
+                }
+            }
+            tr:last-child {
+                th,
+                td {
+                    border-bottom: 1px solid $bk;
+                }
+            }
+        }   
+    }
+}
+.mn-lecturer {
+    background-color: #002D50;
+    color:#fff;
+    & ~ .mn-lecturer {
+        background-color: #001F3E;
+        .lecturer-box {
+            border-color:  #001F3E;
+        }
+    }
+    z-index: -2;
+    .bg-area {
+        z-index: -1;
+        // animation: opacity 1.5s infinite alternate;
+        .obj3 {
+            position: absolute;
+            left: 4%;
+            top: -1%;
+        }
+        .obj4 {
+            position: absolute;
+            right: -2%;
+            top: 40%;
+        }
+    }
+    .lecturer-tit-area {
+        text-align: center;
+        margin-bottom:40px;
+        h3 {
+            font-size:24px;
+            p {
+                margin-top: 4px;
+                font-size:18px;
+            }
+        }
+    }
+    .lecturer-tit-area:last-child {
+        margin-top: 20px;
+        margin-bottom: 0;
+    }
+    .lecturer-box {
+        position: relative;
+        background-color: #004D8880;
+        border:5px solid #002D50;
+        outline:1px solid $spot2;
+        box-sizing: border-box;
+        margin-bottom:40px;
+        padding:60px 40px;
+        &:last-child {
+            margin-bottom:0;
+        }
+        > cite {
+            position: absolute;
+            top:0;
+            left:50%;
+            transform: translateX(-50%);
+            height:36px;
+            line-height: 36px;
+            font-weight: $b;
+            background-color: $spot;
+            padding:0 16px;
+        }
+        > .img-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 24px;
+            min-height: 32px;
+            figure {
+                display: flex;
+                flex-wrap: wrap;
+                gap:8px 60px;
+            }
+            img {
+                display: block;
+                height: 32px;
+                max-width: 100%;
+            }
+        }
+    }
+    .lecturer-list {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: center;
+        width: calc(100% + 40px);
+        margin-left:-40px;
+        > li {
+            display: flex;
+            gap:20px 40px;
+            box-sizing: border-box;
+            flex: 0 1 calc(50% - 40px);
+            margin: 0 0 0 40px;
+        }
+        .img-area {
+            width: 38.88%;
+            img {
+                display: block;
+                width: 100%;
+            }
+        }
+        .txt-area {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100%;
+            flex:1;
+            cite {
+                display: block;
+                margin-bottom: 16px;
+                font-weight: $b;
+                font-size:24px;
+            }
+            p {
+                font-weight: $m;
+                color: #6ED6FF;
+                margin-bottom:4px;
+            }
+            small {
+                font-size: 14px;
+            }
+            .bullet {
+                margin-top:16px;
+                font-size:14px;
+                opacity: .8;
+                > li::before {
+                    background-color: #fff;
+                }
+            }
+            > strong {
+                color: $or;
+                margin-bottom: 8px;
+            }
+        }
+        .txt-area:first-child {
+            text-align: center;
+        }
+    }
+    .lecturer-col-list {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-evenly;
+        gap: 40px;
+        > li {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            overflow: hidden;
+            cite {
+                display: block;
+                text-align: center;
+                font-weight: 700;
+                color: $or;
+            }
+            > ul {
+                // width: 100%;
+                display: flex;
+                gap: 16px;
+                > li  {
+                    flex:1;
+                }
+                figure {
+                    display: block;
+                    width: 100%;
+                }
+                img {
+                    display: block;
+                    width: 160px;
+                    height: 220px;
+                    object-fit: cover;
+                }
+            }
+            p {
+                text-align: center;
+                margin-top: 8px;
+                max-width: 160px;
+                word-break: keep-all;
+            }
+        }
+    }
+}
+.mn-location {
+    .mn-cont {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+    }
+    .txt-area {
+        flex:1;
+        cite {
+            display: block;
+            font-weight: $b;
+            font-size: $fs-lg;
+            margin-bottom: 8px;
+        }
+        li ~ li {
+            margin-top: 32px;
+        }
+        .txt {
+            p ~ p {
+                margin-top: 16px;
+            }
+        }
+        small {
+            display: block;
+            margin: 32px 0;
+        }
+    }
+}
+.map-area {
+    width: 60%;
+    height: 480px;
+    .root_daum_roughmap {
+        width: 100% !important;
+        height: 100% !important;
+    }
+    .wrap_map {
+        height: calc(100% - 32px) !important;
+    }
+}
+
+/* -------------------------------------------------    
+	- TABLET
+------------------------------------------------- */
+@include tablet {
+    .mn-section {
+        padding-top:80px;
+        padding-bottom: 80px;
+    }
+    .mn-visual {
+        min-height: calc(100vh -  60px);
+        height:auto;
+        .txt-area {
+            min-height: calc(100vh -  140px);
+            gap:24px;
+            padding:24px 0 80px 0;
+            h2 {
+                font-size:36px;
+            }
+            p {
+                font-size:32px;
+                margin-top:10px;
+                line-height:1.33;
+            }
+            figure {
+                max-width: 80%;
+            }
+        }
+    }
+	.mn-cont {
+        flex-direction: column;
+    }
+    .bg-area {
+        display: none;
+    }
+    .mn-info {
+        .img-area {
+            max-width: 490px;
+            width: 100%;
+        }
+    }
+    .mn-program {
+        .program {
+            col {
+                display: none;
+            }
+            th,
+            td {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            table {
+                tbody {
+                    th {
+                        background-color: rgba($color:$bk, $alpha:.05);
+                        padding-top:12px;
+                        padding-bottom:12px;
+                        border-right:none;
+                        border-bottom:1px dashed $gr100;
+                    }
+                    tr:last-child th,
+                    tr:last-child td {
+                        border-bottom: none;
+                    }
+                    td {
+                        height:auto;
+                    }
+                }
+            }
+        }
+    }
+    .mn-lecturer {
+        .lecturer-list {
+            flex-direction: column;
+            align-items: center;
+            gap:40px;
+            margin:0;
+            width: 100%;
+            > li {
+                flex:1;
+                margin:0;
+                gap:32px;
+            }
+            .img-area {
+                width: 150px;
+            }
+        }
+        .lecturer-col-list {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+    .mn-location {
+        .mn-cont {
+            display: block;
+        }
+        .txt-aera,
+        .map-area {
+            width: 100%;
+        }
+        .txt-area {
+            margin-bottom:40px;
+        }
+    }
+}
+
+/* -------------------------------------------------    
+	- mobile
+------------------------------------------------- */
+@include mobile {
+    .mn-visual {
+        .txt-area {
+            box-sizing: border-box;
+            gap:40px 0;
+            h2 {
+                em {
+                    font-size:30px;
+                }
+                font-size:24px;
+            }
+            p {
+                font-size:20px;
+            }
+            figure {
+                max-width: 90%;
+            }
+        }
+    }
+    .mn-info {
+        .txt-area {
+            li {
+                gap:4px 12px;
+                min-height: 32px;
+                cite {
+                    width: 70px;
+                    height:30px;
+                    line-height:30px;
+                    font-size:13px;
+                }
+            }
+            figure {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+                img {
+                    height: 32px;
+                }
+            }
+        }
+        .mn-cont {
+            align-items: flex-start;
+        }
+    }
+    .mn-program {
+        .program {
+            .tit-area {
+                margin-bottom: 16px;
+            }
+            table {
+                tbody {
+                    td {
+                        strong {
+                            font-size: 16px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .mn-lecturer {
+        .lecturer-box {
+            padding:60px 24px;
+            margin-bottom: 16px;
+            .img-area {
+                figure {
+                    flex-direction: column;
+                    gap: 24px;
+                }
+            }
+        }
+        .lecturer-tit-area {
+            margin-bottom: 24px;
+            h3 {
+                font-size:18px;
+            }
+        }
+        .lecturer-list {
+            gap: 40px;
+            li {
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+            }
+            .img-area {
+                max-width: 150px;
+                width: 100%;
+            }
+            .txt-area {
+                cite {
+                    text-align: center;
+                    font-size: 18px;
+                }
+            }
+        }
+        .lecturer-col-list {
+            > li {
+                > ul {
+                    flex-wrap: wrap;
+                    gap:30px 0;
+                    width: calc(100% + 8px);
+                    margin-left: -8px;
+                    justify-content: center;
+                    > li {
+                        text-align: center;
+                        align-items: center;
+                        flex:0 1 calc((100% - 16px) / 2);
+                        margin-left:8px;
+                        img {
+                            margin:0 auto;
+                            width: 120px;
+                            height: 160px;
+                        };
+                        p {
+                            max-width: 100%;
+                        }
+                    }
+                    // flex-wrap: wrap;
+                    // img {
+                    //     width: calc((100% - 8px) / 2);
+                    // }
+                }
+            }
+        }
+    } 
+    .mn-location {
+        .txt-area {
+            cite {
+                font-size: 15px;
+            }
+        }
+    }
+    .map-area{
+        height:400px;
+    } 
+}

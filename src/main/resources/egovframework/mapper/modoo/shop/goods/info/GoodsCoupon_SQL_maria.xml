@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="modoo.module.shop.goods.info.service.impl.GoodsCouponMapper">
+
+	<!-- 상품쿠폰 업로드 저장 -->
+	<insert id="insertUploadGoodsCoupon" parameterType="modoo.module.shop.goods.info.service.GoodsCouponVO">
+		INSERT INTO STT_UPLOAD_COUPON (
+			COUPON_NO
+			,UPLOAD_GROUP_ID
+			,REGISTER_ID
+		) VALUES(
+			#{couponNo}
+			,#{uploadGroupId}
+			,#{registerId}
+		)
+	</insert>
+	
+	<!-- 임시 상품쿠폰 저장 -->
+	<insert id="insertTmpCoupon" parameterType="modoo.module.shop.goods.info.service.GoodsCouponVO">
+		INSERT INTO STT_UPLOAD_COUPON (
+			COUPON_NO
+			,UPLOAD_GROUP_ID
+			,REGISTER_ID
+		) VALUES(
+			#{couponNo}
+			,#{uploadGroupId}
+			,#{registerId}
+		)
+	</insert>
+
+	<!-- 삭제 : 업로드 임시 엑셀데이터  -->
+	<delete id="deleteTmpUploadCouponExcel" parameterType="modoo.module.shop.goods.info.service.GoodsCouponVO">
+		DELETE FROM STT_UPLOAD_COUPON
+		WHERE	UPLOAD_GROUP_ID = #{uploadGroupId}
+	</delete>
+	
+	<!-- 임시 쿠폰 데이터 목록 -->
+	<select id="selectTmpUploadCouponExcelList" parameterType="modoo.module.shop.goods.info.service.GoodsCouponVO" resultType="modoo.module.shop.goods.info.service.GoodsCouponVO">
+		SELECT
+			GOODS_COUPON_NO
+			,COUPON_NO
+		FROM	STT_UPLOAD_COUPON
+		WHERE	UPLOAD_GROUP_ID = #{uploadGroupId}
+	</select>
+
+	<!-- 임시 쿠폰데이터 수정 -->
+	<update id="updateTmpUploadCouponExcel" parameterType="modoo.module.shop.goods.info.service.GoodsCouponVO">
+		UPDATE STT_UPLOAD_COUPON
+		SET
+			COUPON_NO = #{couponNo}
+		WHERE	GOODS_COUPON_NO = #{goodsCouponNo}
+	</update>
+	
+	<!-- 임시 쿠폰 체크 카운트 -->
+	<select id="selectTmpCouponCheckCnt" parameterType="modoo.module.shop.goods.info.service.GoodsCouponVO" resultType="int">
+		SELECT
+			COUNT(*) CNT
+		FROM STT_UPLOAD_COUPON
+		WHERE	COUPON_NO = #{couponNo}
+			AND UPLOAD_GROUP_ID = #{uploadGroupId}
+			AND GOODS_COUPON_NO NOT IN (#{goodsCouponNo})
+	</select>
+	
+	<!-- 임시쿠폰 목록 삭제 -->
+	<delete id="deleteTmpCouponList" parameterType="modoo.module.shop.goods.info.service.GoodsCouponVO">
+		DELETE FROM STT_UPLOAD_COUPON
+		WHERE	GOODS_COUPON_NO IN 
+			<foreach collection="searchGoodsCouponNoList" item="item" separator="," open="(" close=")">
+				#{item}
+			</foreach>
+	</delete>
+	
+	<!-- 상품 쿠폰 저장  -->
+	<insert id="insertGoodsCoupon" parameterType="modoo.module.shop.goods.info.service.GoodsCouponVO">
+		INSERT INTO STN_GOODS_COUPON (
+			GOODS_ID
+			,COUPON_NO
+			,ORDER_NO
+			,COUPON_NM
+			,COUPON_KND_CODE
+			,COUPON_STTUS_CODE
+			,COUPON_VALID_PD
+			,COUPON_PD_TY
+			,REGST_PNTTM
+			,COUPON_BEGIN_PNTTM
+			,COUPON_END_PNTTM
+		) VALUES (
+			#{goodsId}
+			,#{couponNo}
+			,#{orderNo}
+			,#{couponNm}
+			,#{couponKndCode}
+		    ,'NOT'
+		    ,(SELECT VCH_VALID_PD FROM STN_GOODS WHERE GOODS_ID = #{goodsId})
+		    ,(SELECT VCH_PD_TY FROM STN_GOODS WHERE GOODS_ID = #{goodsId})
+			,SYSDATE()
+			,DATE_FORMAT( SYSDATE(), '%Y%m%d' )
+			<if test="couponKndCode != 'ETC'">
+			,(SELECT DATE_FORMAT((SELECT LAST_DAY(DATE_ADD(SYSDATE(),INTERVAL #{couponAddPd}
+				<choose>
+					<when test="@egovframework.com.cmm.util.EgovMybaitsUtil@isEquals(couponPdTy,'DAY')">
+						DAY
+					</when>
+					<when test="@egovframework.com.cmm.util.EgovMybaitsUtil@isEquals(couponPdTy,'MONTH')">
+						MONTH
+					</when>
+				</choose>
+			  ))),'%Y%m%d'))
+			</if>
+			<if test="@egovframework.com.cmm.util.EgovMybaitsUtil@isEquals(couponKndCode,'ETC')">
+				,(SELECT DATE_FORMAT((SELECT LAST_DAY(DATE_ADD(SYSDATE(),INTERVAL 12 MONTH))),'%Y%m%d'))
+			</if>
+		)
+
+	</insert>
+
+
+	<!-- 주문쿠폰상세-->
+	<select id="selectGoodsCoupon" parameterType="modoo.module.shop.goods.info.service.GoodsCouponVO" resultType="modoo.module.shop.goods.info.service.GoodsCouponVO">
+		SELECT
+		gc.GOODS_COUPON_NO
+		,gc.GOODS_ID
+		,gc.COUPON_NO
+		,gc.COUPON_NM
+		,gc.ORDER_NO
+		,gc.COUPON_STTUS_CODE
+		,gc.COUPON_KND_CODE
+		,gc.REGST_PNTTM
+		,gc.COUPON_BEGIN_PNTTM
+		,gc.COUPON_END_PNTTM
+		,o.ORDRR_ID
+		,o.ORDRR_NM AS ORDRR_NM
+		FROM	STN_GOODS_COUPON gc
+		LEFT JOIN STN_ORDER o ON o.ORDER_NO = gc.ORDER_NO
+		<include refid="selectGoodsCouponListWhere"></include>
+	</select>
+
+	<!-- 쿠폰목록 -->
+	<select id="selectGoodsCouponList" parameterType="modoo.module.shop.goods.info.service.GoodsCouponVO" resultType="modoo.module.shop.goods.info.service.GoodsCouponVO">
+		SELECT
+			gc.GOODS_COUPON_NO
+			,gc.GOODS_ID
+			,gc.COUPON_NO
+			,gc.COUPON_NM
+			,gc.ORDER_NO
+			,gc.COUPON_STTUS_CODE
+			,gc.COUPON_KND_CODE
+			,gc.REGST_PNTTM
+			,gc.COUPON_BEGIN_PNTTM
+			,gc.COUPON_END_PNTTM
+			,o.ORDRR_ID
+			,o.CHLDRN_NM
+			,o.ORDRR_NM AS ORDRR_NM
+			,o.FRST_REGIST_PNTTM
+		FROM	STN_GOODS_COUPON gc
+		LEFT JOIN STN_ORDER o ON o.ORDER_NO = gc.ORDER_NO
+		<include refid="selectGoodsCouponListWhere"></include>
+		ORDER BY o.FRST_REGIST_PNTTM DESC
+		LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
+	</select>
+	
+	<!-- 쿠폰목록 -->
+	<!--<select id="selectGoodsCouponCnt" parameterType="modoo.module.shop.goods.info.service.GoodsCouponVO" resultType="int">
+		SELECT 
+			COUNT(*)
+			FROM	stn_goods_coupon gc
+		WHERE gc.ORDER_NO IS NULL
+		AND gc.GOODS_ID = #{goodsId}
+	</select>-->
+
+	<!-- 쿠폰목록 -->
+	<select id="selectGoodsCouponCnt" parameterType="modoo.module.shop.goods.info.service.GoodsCouponVO" resultType="int">
+		SELECT
+			IFNULL(COUNT(*),0)
+		FROM	STN_GOODS_COUPON gc
+		LEFT JOIN STN_ORDER o ON o.ORDER_NO = gc.ORDER_NO
+		<include refid="selectGoodsCouponListWhere"></include>
+	</select>
+	
+	<sql id="selectGoodsCouponListWhere">
+		WHERE	
+			1=1
+			<if test="@egovframework.com.cmm.util.EgovMybaitsUtil@isNotEmpty(goodsId)">
+				AND gc.GOODS_ID= #{goodsId}
+			</if>
+			<if test="@egovframework.com.cmm.util.EgovMybaitsUtil@isNotEmpty(orderNo)">
+				AND gc.ORDER_NO = #{orderNo}
+			</if>
+			<if test="@egovframework.com.cmm.util.EgovMybaitsUtil@isNotEmpty(searchCouponKndCode)">
+				AND gc.COUPON_KND_CODE = #{searchCouponKndCode}
+			</if>
+			<if test="@egovframework.com.cmm.util.EgovMybaitsUtil@isNotEmpty(searchCouponSttus)">
+				<choose>
+					<when test="@egovframework.com.cmm.util.EgovMybaitsUtil@isEquals(searchCouponSttus, 'Y')">
+						AND gc.COUPON_STTUS_CODE = 'NOT'
+					</when>
+					<otherwise>
+						AND gc.COUPON_STTUS_CODE IN ('USE','CANCL')
+					</otherwise>
+				</choose>
+			</if>
+			<if test="@egovframework.com.cmm.util.EgovMybaitsUtil@isNotEmpty(searchCondition)">
+				<choose>
+					<when test="@egovframework.com.cmm.util.EgovMybaitsUtil@isEquals(searchCondition, 'ODNM')">
+						<if test="@egovframework.com.cmm.util.EgovMybaitsUtil@isNotEmpty(searchKeyword)">
+							AND o.ORDRR_NM LIKE CONCAT('%',#{searchKeyword},'%')
+						</if>
+					</when>
+					<when test="@egovframework.com.cmm.util.EgovMybaitsUtil@isEquals(searchCondition, 'CPNM')">
+						<if test="@egovframework.com.cmm.util.EgovMybaitsUtil@isNotEmpty(searchKeyword)">
+							AND gc.COUPON_NM LIKE CONCAT('%',#{searchKeyword},'%')
+						</if>
+					</when>
+					<otherwise>
+					</otherwise>
+				</choose>
+			</if>
+	</sql>
+	
+	<!-- 중복쿠목 목록 -->
+	<select id="selectGoodsCouponDuplList" parameterType="modoo.module.shop.goods.info.service.GoodsCouponVO" resultType="egovMap">
+		SELECT 
+			uc.COUPON_NO 
+		FROM STT_UPLOAD_COUPON uc
+		INNER JOIN STN_GOODS_COUPON gc ON gc.COUPON_NO = uc.COUPON_NO
+		WHERE	uc.UPLOAD_GROUP_ID = #{uploadGroupId}
+	</select>
+	
+	<!-- 쿠폰번호 수정 -->
+	<update id="updateGoodsCouponNo" parameterType="modoo.module.shop.goods.info.service.GoodsCouponVO">
+		UPDATE STN_GOODS_COUPON
+		SET
+			COUPON_NO = #{couponNo}
+		WHERE 	GOODS_COUPON_NO = #{goodsCouponNo}
+			AND ORDER_NO IS NULL
+	</update>
+
+	<!-- 쿠폰 주문번호 삽입-->
+	<update id="updateGoodsCouponOrderNo" parameterType="modoo.module.shop.goods.info.service.GoodsCouponVO">
+		UPDATE STN_GOODS_COUPON
+		SET
+			ORDER_NO = #{orderNo}
+		WHERE 	GOODS_COUPON_NO = #{goodsCouponNo}
+			AND ORDER_NO IS NULL
+	</update>
+
+	<!-- 쿠폰 상태수정 삽입-->
+	<update id="updateGoodsCouponSttus" parameterType="modoo.module.shop.goods.info.service.GoodsCouponVO">
+		UPDATE STN_GOODS_COUPON
+		SET
+			COUPON_STTUS_CODE = #{couponSttusCode}
+			<if test="@egovframework.com.cmm.util.EgovMybaitsUtil@isNotEmpty(couponBeginPnttm)">
+				,COUPON_BEGIN_PNTTM = #{couponBeginPnttm}
+			</if>
+			,LAST_UPDT_PNTTM = SYSDATE()
+			<include refid="updateGoodsCouponWhere"/>
+	</update>
+
+	<sql id="updateGoodsCouponWhere">
+		<where>
+			1=1
+			<if test="@egovframework.com.cmm.util.EgovMybaitsUtil@isNotEmpty(orderNo)">
+				AND ORDER_NO = #{orderNo}
+			</if>
+			<if test="@egovframework.com.cmm.util.EgovMybaitsUtil@isNotEmpty(couponNo)">
+				AND COUPON_NO = #{couponNo}
+			</if>
+		</where>
+	</sql>
+	
+	<!-- 쿠폰 상세 -->
+	<select id="selectGoodsCouponDetail" parameterType="modoo.module.shop.goods.info.service.GoodsCouponVO" resultType="egovMap">
+		SELECT
+			gc.GOODS_COUPON_NO
+			,gc.GOODS_ID
+			,gc.COUPON_NO
+			,gc.ORDER_NO
+			,gc.REGST_PNTTM
+		FROM	STN_GOODS_COUPON gc
+		WHERE	GOODS_COUPON_NO = #{goodsCouponNo}
+	</select>
+	
+	<!-- 쿠폰삭제 -->
+	<delete id="deleteGoodsCoupon" parameterType="modoo.module.shop.goods.info.service.GoodsCouponVO">
+		DELETE FROM STN_GOODS_COUPON
+		WHERE	GOODS_COUPON_NO IN
+			<foreach collection="searchGoodsCouponNoList" item="item" separator="," open="(" close=")">
+				#{item}
+			</foreach>
+			AND ORDER_NO IS NULL
+	</delete>
+	
+	<!-- 쿠폰 판매 목록 -->
+	<select id="selectGoodsCouponSleCheckList" parameterType="modoo.module.shop.goods.info.service.GoodsCouponVO" resultType="egovMap">
+		SELECT 
+			gc.GOODS_COUPON_NO
+			,gc.GOODS_ID
+			,gc.COUPON_NO
+			,gc.ORDER_NO
+			,gc.REGST_PNTTM
+		FROM 	STN_GOODS_COUPON gc
+		LEFT JOIN	STN_ORDER o ON o.ORDER_NO = gc.ORDER_NO
+		WHERE 	gc.GOODS_COUPON_NO IN
+			<foreach collection="searchGoodsCouponNoList" item="item" separator="," open="(" close=")">
+				#{item}
+			</foreach>
+			AND gc.ORDER_NO IS NOT NULL
+	</select>
+	
+	<!--쿠폰 발급-->
+	<select id="selectSleGoodsCoupon" parameterType="modoo.module.shop.goods.info.service.GoodsCouponVO" resultType="modoo.module.shop.goods.info.service.GoodsCouponVO">
+		SELECT
+			gc.GOODS_COUPON_NO
+			,gc.GOODS_ID
+			,gc.COUPON_NO
+			,gc.ORDER_NO
+			,gc.REGST_PNTTM
+		FROM	STN_GOODS_COUPON gc
+		LEFT JOIN STN_ORDER o ON o.ORDER_NO = gc.ORDER_NO
+		WHERE	gc.GOODS_ID = #{goodsId}
+		AND gc.ORDER_NO IS NULL
+		LIMIT #{orderCo}
+	</select>
+	
+	
+</mapper>

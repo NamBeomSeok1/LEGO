@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title></title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+
+    <link href="../../../resources/front/site/forum/css/style.css" rel="stylesheet" />
+    <style type="text/css">
+        .body { padding: 0 50px; }
+        .body h1 { margin: 80px 0 20px; font-size: 24px; font-weight: 500; }
+        .body .gtit { font-weight: 600; font-size: 40px; border-bottom: 1px solid #111; padding-bottom: 30px; }
+    </style>
+</head>
+<body>
+    <div class="body">
+        <h1 class="gtit">component</h1>
+        <h1>페이징: paging</h1>
+        <ul class="paging">
+            <li class="ppv"><a href="#none" title="처음으로"><span class="txt-hide">처음으로</span></a></li>
+            <li class="pv"><a href="#none" title="이전"><span class="txt-hide">이전</span></a></li>
+            <li class="is-active"><a href="#none" title="to 1 page">1</a></li>
+            <li><a href="#none" title="to 2 page">2</a></li>
+            <li><a href="#none" title="to 3 page">3</a></li>
+            <li><a href="#none" title="to 4 page">4</a></li>
+            <li><a href="#none" title="to 5 page">5</a></li>
+            <li class="fw"><a href="#none" title="다음"><span class="txt-hide">다음</span></a></li>
+            <li class="ffw"><a href="#none" title="끝으로"><span class="txt-hide">끝으로</span></a></li>
+        </ul>
+
+        <h1>탭 nav : tabs-nav</h1>
+        <!-- tabs-nav -->
+        <ul class="tabs-nav">
+            <li><a href="#none" class="is-active">tabs1</a></li>
+            <li><a href="#none">tabs2</a></li>
+            <li><a href="#none">tabs3</a></li>
+        </ul>
+
+        <!-- <h1>작은탭 nav : tabs-nav-sm</h1> -->
+        <!-- tabs-nav-sm -->
+        <!-- <ul class="tabs-nav-sm">
+            <li><a href="#none" class="is-active">tab-nav-sm1</a></li>
+            <li><a href="#none">tab-nav-sm2</a></li>
+            <li><a href="#none">tab-nav-sm3</a></li>
+        </ul> -->
+        <!-- tabs noraml -->
+        <h1>탭: normal</h1>
+        <div class="tabs-normal">
+            <ul class="tabs-nav">
+                <li><a href="#normalmenu1" class="is-active">tabs-normal menu1</a></li>
+                <li><a href="#normalmenu2">tabs-normal menu2</a></li>
+            </ul>
+            <!--<ul class="tabs-nav-sm">
+                <li><a href="#normalmenu1" class="is-active">tabs-normal menu1</a></li>
+                <li><a href="#normalmenu2">tabs-normal menu2</a></li>
+            </ul>-->
+            <div id="normalmenu1" class="tabs-cont">
+                tabs normal content1
+            </div>
+            <div id="normalmenu2" class="tabs-cont">
+                tabs normal content2
+            </div>
+        </div>
+
+        <h1>검색 : sch-area</h1>
+        <div>
+            <div class="sch-area">
+                <!-- <div class="selectbox">
+                    <select title="검색옵션1 선택">
+                        <option>과정분류1</option>
+                    </select>
+                </div>
+                <div class="selectbox">
+                    <select title="검색옵션2 선택">
+                        <option>과정분류2</option>
+                    </select>
+                </div> -->
+                <div class="sch">
+                    <input type="text" placeholder="검색어 입력" title="검색어 입력" />
+                    <button type="submit" class="btn-sch"><span class="txt-hide">검색</span></button>
+                </div>
+            </div>
+            <div class="total-count">전체 18건</div>
+        </div>
+
+        <h1>기능(좌,우) : fnc-area</h1>
+        <div class="fnc-area">
+            <div class="l-area">
+                텍스트 (좌)
+            </div>
+            <div class="r-area">
+                <a href="#none" class="btn">버튼(우)</a>
+            </div>
+        </div>
+
+        <h1>타이틀 : tit-area</h1>
+        <div class="tit-area">
+            <h3 class="tit">타이틀</h3>
+            <p>타이틀 보조 설명</p>
+        </div>
+
+        <h1>타이틀 lg : tit-area : tit-lg</h1>
+        <div class="tit-area">
+            <h3 class="tit-lg">타이틀</h3>
+            <p class="fs-lg">타이틀 보조 설명</p>
+        </div>
+
+        <h1>타이틀 sm : tit-area : tit-sm</h1>
+        <div class="tit-area">
+            <h3 class="tit-sm">타이틀</h3>
+            <p>타이틀 보조 설명</p>
+        </div>
+
+        <h1>bg-box : bullet / bullet-tit / bullet-dash </h1>
+        <div class="bg-box">
+            <cite class="box-tit">box 타이틀</cite>
+            <ul class="bullet">
+                <li>bullet</li>
+                <li>회원 종류에 따라 가입절차에 차이가 있으며 반드시 본인이 해당하는 경우를 선택해주셔야 합니다.</li>
+                <li>기업회원으로 가입하시기 위해서는 사업자 등록번호 확인 절차를 반드시 거치셔야 합니다.</li>
+            </ul>
+            <ul class="bullet-tit">
+                <li><cite>bullet-tit</cite> bullet-tit내용</li>
+                <li><cite>제목입력</cite>회원 종류에 따라 가입절차에 차이가 있으며 반드시 본인이 해당하는 경우를 선택해주셔야 합니다.</li>
+                <li><cite>제목입력</cite>기업회원으로 가입하시기 위해서는 사업자 등록번호 확인 절차를 반드시 거치셔야 합니다.</li>
+            </ul>
+            <ul class="bullet-dash">
+                <li>bullet-dash</li>
+                <li>회원 종류에 따라 가입절차에 차이가 있으며 반드시 본인이 해당하는 경우를 선택해주셔야 합니다.</li>
+                <li>기업회원으로 가입하시기 위해서는 사업자 등록번호 확인 절차를 반드시 거치셔야 합니다.</li>
+            </ul>
+        </div>
+        <h1>border-box : bullet.fs-sm / bullet-tit.fs-sm / bullet-dash.fs-sm</h1>
+        <div class="border-box">
+            <cite class="box-tit">box 타이틀</cite>
+            <ul class="bullet fs-sm">
+                <li>bullet</li>
+                <li>회원 종류에 따라 가입절차에 차이가 있으며 반드시 본인이 해당하는 경우를 선택해주셔야 합니다.</li>
+                <li>기업회원으로 가입하시기 위해서는 사업자 등록번호 확인 절차를 반드시 거치셔야 합니다.</li>
+            </ul>
+            <ul class="bullet-tit fs-sm">
+                <li><cite>bullet-tit</cite> bullet-tit내용</li>
+                <li><cite>제목입력</cite>회원 종류에 따라 가입절차에 차이가 있으며 반드시 본인이 해당하는 경우를 선택해주셔야 합니다.</li>
+                <li><cite>제목입력</cite>기업회원으로 가입하시기 위해서는 사업자 등록번호 확인 절차를 반드시 거치셔야 합니다.</li>
+            </ul>
+            <ul class="bullet-dash fs-sm">
+                <li>bullet-dash fs-sm(작은폰트)</li>
+                <li>회원 종류에 따라 가입절차에 차이가 있으며 반드시 본인이 해당하는 경우를 선택해주셔야 합니다.</li>
+                <li>기업회원으로 가입하시기 위해서는 사업자 등록번호 확인 절차를 반드시 거치셔야 합니다.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="../../../../resources/front/site/SITE_00002/js/jquery-3.6.0.min.js"></script>
+
+    <!--퍼블 layout-->
+    <script src="../../../../resources/front/site/SITE_00002/js/_layout.js"></script>
+
+    <script src="../../../../resources/front/site/SITE_00002/js/jquery-ui.min.js"></script>
+    <script src="../../../../resources/front/site/SITE_00002/js/jquery.easing.1.3.js"></script>
+    <script src="../../../../resources/front/site/SITE_00002/js/ssm.min.js"></script>
+    <script src="../../../../resources/front/site/SITE_00002/js/swiper-bundle.js"></script>
+    <script src="../../../../resources/front/site/SITE_00002/js/common.js"></script>
+</body>
+</html>

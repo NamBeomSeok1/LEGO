@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+  <g id="Icon_feather-download" data-name="Icon feather-download" transform="translate(-3.5 -3.5)">
+    <path id="패스_444" data-name="패스 444" d="M22.278,30.167H6.722A3.226,3.226,0,0,1,3.5,26.944V22.5a1,1,0,0,1,2,0v4.444a1.224,1.224,0,0,0,1.222,1.222H22.278A1.224,1.224,0,0,0,23.5,26.944V22.5a1,1,0,0,1,2,0v4.444A3.226,3.226,0,0,1,22.278,30.167Z" transform="translate(0 -4.667)" fill="#14bdff"/>
+    <path id="패스_445" data-name="패스 445" d="M16.056,21.556a1,1,0,0,1-.707-.293L9.793,15.707a1,1,0,0,1,1.414-1.414l4.848,4.848L20.9,14.293a1,1,0,0,1,1.414,1.414l-5.556,5.556A1,1,0,0,1,16.056,21.556Z" transform="translate(-1.556 -2.722)" fill="#14bdff"/>
+    <path id="패스_446" data-name="패스 446" d="M18,18.833a1,1,0,0,1-1-1V4.5a1,1,0,1,1,2,0V17.833A1,1,0,0,1,18,18.833Z" transform="translate(-3.5)" fill="#14bdff"/>
+  </g>
+</svg>

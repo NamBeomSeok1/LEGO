@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="modoo.module.shop.goods.cart.service.impl.CartMapper">
+
+	<!-- 장바구니 목록 -->
+	<!--<select id="selectCartList" parameterType="modoo.module.shop.goods.cart.service.CartVO" resultType="egovMap">
+		SELECT
+			c.CART_NO
+			,c.GOODS_ID
+			,c.ORDRR_ID
+			,c.SBSCRPT_CYCLE_SE_CODE
+			,c.SBSCRPT_WEEK_CYCLE
+			,c.SBSCRPT_DLVY_WD
+			,c.SBSCRPT_USE_WEEK
+			,c.SBSCRPT_MT_CYCLE
+			,c.SBSCRPT_USE_MT
+			,c.SBSCRPT_DLVY_DAY
+			,c.ORDER_CO
+			,c.CART_ADD_AT
+			,c.REGIST_PNTTM
+			,c.USE_AT
+			,c.EXPRN_USE_AT
+			,c.COMPNO_DSCNT_USE_AT
+			,g.GOODS_NM
+			,g.GOODS_KND_CODE
+			,g.GOODS_PC
+			,g.GOODS_INTRCN
+			,g.DLVY_POLICY_SE_CODE
+			,g.DLVY_POLICY_CN
+			,g.DLVY_SE_CODE
+			,g.DLVY_PC
+			,g.SOLD_OUT_AT
+			,g.FREE_DLVY_PC
+			,(SELECT GOODS_IMAGE_THUMB_PATH FROM STN_GOODS_IMAGE WHERE GOODS_ID = g.GOODS_ID AND GOODS_IMAGE_SE_CODE = 'GNR' ORDER BY GOODS_IMAGE_SN ASC LIMIT 1 ) AS GOODS_TITLE_IMAGE_PATH
+			&lt;!&ndash;장바구니 총 가격 =상품금액*주문개수+1회체험가격+양수인옵션가격&ndash;&gt;
+			,(CASE WHEN
+			 c.EXPRN_USE_AT = 'Y'
+			 THEN
+				(g.GOODS_PC * c.ORDER_CO + g.EXPRN_PC*c.ORDER_CO  + (SELECT IFNULL(SUM(GITEM_PC),0) FROM STN_CART_ITEM WHERE CART_NO = c.CART_NO AND GITEM_PC > 0))
+			 ELSE
+			 ((g.GOODS_PC +(SELECT IFNULL(SUM(GITEM_PC),0) FROM STN_CART_ITEM WHERE CART_NO = c.CART_NO AND GITEM_PC > 0)) * c.ORDER_CO)
+			 END ) AS CART_TOT_PC
+			&lt;!&ndash;할인가격 = 음수인옵션가격+복수구매할인가격&ndash;&gt;
+
+			,(CASE WHEN
+				c.COMPNO_DSCNT_USE_AT = 'Y'
+			THEN
+				(SELECT (c.ORDER_CO*g.COMPNO_DSCNT_PC)+IFNULL(SUM(GITEM_PC),0)
+					FROM STN_CART_ITEM
+					WHERE CART_NO = c.CART_NO AND GITEM_PC <![CDATA[<]]> 0)
+			ELSE
+				(SELECT IFNULL(SUM(GITEM_PC),0)
+					 FROM STN_CART_ITEM
+				 	WHERE CART_NO = c.CART_NO AND GITEM_PC <![CDATA[<]]> 0)
+			END) AS DSCNT_PC
+			,(CASE WHEN
+				c.COMPNO_DSCNT_USE_AT = 'Y'
+			THEN
+			(SELECT (c.ORDER_CO*g.COMPNO_DSCNT_PC)+(g.GOODS_PC * c.ORDER_CO + (SELECT IFNULL(SUM(GITEM_PC),0)
+				FROM STN_CART_ITEM
+				WHERE CART_NO = c.CART_NO AND GITEM_SE_CODE IN ('D','A'))))
+			ELSE
+			(g.GOODS_PC * c.ORDER_CO +
+			(SELECT IFNULL(SUM(GITEM_PC),0)
+			 	FROM STN_CART_ITEM
+			 	WHERE CART_NO = c.CART_NO AND GITEM_SE_CODE IN ('D','A')))
+			END) AS NEXT_TOT_PC
+			,((SELECT IFNULL(SUM(GITEM_PC),0)
+				 FROM STN_CART_ITEM
+			 	WHERE CART_NO = c.CART_NO AND GITEM_SE_CODE IN ('D','A','F') AND GITEM_PC > 0)) AS OPT_PC
+			,g.D_OPTN_USE_AT
+			,d.D_OPTN_TYPE
+		FROM	STN_CART c
+		INNER JOIN STN_GOODS g ON g.GOODS_ID = c.GOODS_ID AND g.USE_AT = 'Y'
+		INNER JOIN STN_GOODS_ITEM_INFO d ON g.GOODS_ID = d.GOODS_ID
+		<include refid="selectCartListWhere"></include>
+		ORDER BY CART_GROUP_NO DESC
+	</select>-->
+
+	<select id="selectCartList" parameterType="modoo.module.shop.goods.cart.service.CartVO" resultType="egovMap">
+		SELECT
+		c.CART_NO
+		,c.GOODS_ID
+		,c.ORDRR_ID
+		,c.SBSCRPT_CYCLE_SE_CODE
+		,c.SBSCRPT_WEEK_CYCLE
+		,c.SBSCRPT_DLVY_WD
+		,c.SBSCRPT_USE_WEEK
+		,c.SBSCRPT_MT_CYCLE
+		,c.SBSCRPT_USE_MT
+		,c.SBSCRPT_DLVY_DAY
+		,c.ORDER_CO
+		,c.CART_ADD_AT
+		,c.REGIST_PNTTM
+		,c.USE_AT
+		,c.EXPRN_USE_AT
+		,c.COMPNO_DSCNT_USE_AT
+		,g.GOODS_NM
+		,g.GOODS_KND_CODE
+		,g.GOODS_PC
+		,g.GOODS_CTGRY_ID
+		,IFNULL(g.DPSTRY_AT,"N")
+		,g.GOODS_INTRCN
+		,g.DLVY_POLICY_SE_CODE
+		,g.DLVY_POLICY_CN
+		,g.DLVY_SE_CODE
+		,g.DLVY_PC
+		,g.SOLD_OUT_AT
+		,g.FREE_DLVY_PC
+		,(SELECT GOODS_IMAGE_THUMB_PATH FROM STN_GOODS_IMAGE WHERE GOODS_ID = g.GOODS_ID AND GOODS_IMAGE_SE_CODE = 'GNR' ORDER BY GOODS_IMAGE_SN ASC LIMIT 1 ) AS GOODS_TITLE_IMAGE_PATH
+		,case when g.EXPRN_USE_AT = 'Y'
+			THEN
+				FN_GET_TOT(c.CART_NO,g.EXPRN_PC,ci.GITEM_SE_CODE )
+			ELSE
+				FN_GET_TOT(c.CART_NO,0,ci.GITEM_SE_CODE )
+		end CART_TOT_PC
+		,
+		case when g.COMPNO_DSCNT_USE_AT = 'Y'
+			THEN
+				case
+				when ci.GITEM_SE_CODE  is null
+					THEN
+					( (g.COMPNO_DSCNT_PC * c.ORDER_CO) + (SELECT IFNULL(SUM(GITEM_PC),0) FROM STN_CART_ITEM WHERE CART_NO = c.CART_NO AND GITEM_PC  <![CDATA[<]]>  0))
+				when ci.GITEM_SE_CODE  = 'D'
+					THEN
+					( (g.COMPNO_DSCNT_PC * (SELECT IFNULL(SUM(GITEM_CO),1) FROM STN_CART_ITEM WHERE CART_NO = c.CART_NO AND GITEM_SE_CODE = 'D'))
+					+ (SELECT IFNULL(SUM(GITEM_PC),0) FROM STN_CART_ITEM WHERE CART_NO = c.CART_NO AND GITEM_PC  <![CDATA[<]]>  0))
+				end
+			ELSE
+				(SELECT IFNULL(SUM(GITEM_PC),0) FROM STN_CART_ITEM WHERE CART_NO = c.CART_NO AND GITEM_PC  <![CDATA[<]]> 0)
+		end DSCNT_PC
+		,case when g.COMPNO_DSCNT_USE_AT = 'Y'
+			THEN
+				case
+					when ci.GITEM_SE_CODE  is null
+					THEN
+					FN_GET_TOT(c.CART_NO,0,ci.GITEM_SE_CODE ) +  (SELECT IFNULL(SUM(GITEM_PC),0) FROM STN_CART_ITEM WHERE CART_NO = c.CART_NO AND GITEM_PC  <![CDATA[<]]> 0)
+					when ci.GITEM_SE_CODE  = 'D'
+					THEN
+					FN_GET_TOT(c.CART_NO,0,ci.GITEM_SE_CODE ) + (SELECT IFNULL(SUM(GITEM_PC),0) FROM STN_CART_ITEM WHERE CART_NO = c.CART_NO AND GITEM_PC  <![CDATA[<]]> 0)
+				end
+			ELSE
+			FN_GET_TOT(c.CART_NO,0,ci.GITEM_SE_CODE ) +	(SELECT IFNULL(SUM(GITEM_PC),0) FROM STN_CART_ITEM WHERE CART_NO = c.CART_NO AND GITEM_PC  <![CDATA[<]]> 0)
+		end NEXT_TOT_PC
+		,0 AS OPT_PC
+		,g.D_OPTN_USE_AT
+		,c.D_OPTN_TYPE
+		,ci.GITEM_SE_CODE
+		,c.CHLDRN_NM
+		,c.CHLDRN_ID
+		FROM	STN_CART c
+		INNER JOIN STN_GOODS g ON g.GOODS_ID = c.GOODS_ID AND g.USE_AT = 'Y'
+		left join STN_CART_ITEM ci on c.CART_NO = ci.CART_NO and ci.GITEM_SE_CODE in ('S','D')
+		<include refid="selectCartListWhere"></include>
+		group by c.CART_NO
+		ORDER BY CART_GROUP_NO DESC
+	</select>
+
+
+
+	<sql id="selectCartListWhere">
+		<where>
+			AND c.USE_AT = 'Y'
+			AND c.ORDRR_ID = #{searchOrdrrId}
+			<choose>
+				<when test="@egovframework.com.cmm.util.EgovMybaitsUtil@isEquals(cartAddAt, 'Y')">
+					AND c.CART_ADD_AT = 'Y'
+				</when>
+				<otherwise>
+					AND c.CART_ADD_AT = 'N'
+				</otherwise>
+			</choose>
+			<!--<if test="searchCartNoList != null">
+				AND c.CART_NO IN <foreach item="item" index="index" collection="searchCartNoList" open="(" separator="," close=")">#{item}</foreach>
+			</if>-->
+			<choose>
+				<when test="@egovframework.com.cmm.util.EgovMybaitsUtil@isNotEmpty(searchCartNoList)">
+					AND c.CART_GROUP_NO IN <foreach item="item" index="index" collection="searchCartNoList" open="(" separator="," close=")">#{item}</foreach>
+				</when>
+				<when test="@egovframework.com.cmm.util.EgovMybaitsUtil@isNotEmpty(cartGroupNo)">
+					AND c.CART_GROUP_NO = #{cartGroupNo}
+				</when>
+			</choose>
+		</where>
+	</sql>
+
+<!-- 장바구니 상세 -->
+	<select id="selectCart" parameterType="modoo.module.shop.goods.cart.service.CartVO" resultType="egovMap">
+		SELECT
+			c.CART_NO
+			,c.GOODS_ID
+			,c.ORDRR_ID
+			,c.SBSCRPT_CYCLE_SE_CODE
+			,c.SBSCRPT_WEEK_CYCLE
+			,c.SBSCRPT_DLVY_WD
+			,c.SBSCRPT_USE_WEEK
+			,c.SBSCRPT_MT_CYCLE
+			,c.SBSCRPT_USE_MT
+			,c.SBSCRPT_DLVY_DAY
+			,c.ORDER_CO
+			,c.CART_ADD_AT
+			<!-- ,c.EXPRN_PC -->
+			,c.EXPRN_USE_AT
+			,c.COMPNO_DSCNT_USE_AT
+			,c.REGIST_PNTTM
+			,c.USE_AT
+			,g.GOODS_NM
+			,g.GOODS_KND_CODE
+			,g.GOODS_PC
+			,g.DLVY_POLICY_SE_CODE
+			,g.DLVY_POLICY_CN
+			,g.DLVY_SE_CODE
+			,g.DLVY_PC
+			,g.FREE_DLVY_PC
+		FROM STN_CART c
+		INNER JOIN STN_GOODS g ON g.GOODS_ID = c.GOODS_ID AND g.USE_AT = 'Y'
+		WHERE c.CART_NO= #{cartNo}
+	</select>
+
+
+	<!-- 장바구니 목록 카운트 -->
+	<select id="selectCartListCnt" parameterType="modoo.module.shop.goods.cart.service.CartVO" resultType="int">
+		SELECT
+			count(DISTINCT c.CART_GROUP_NO) AS CNT
+		FROM	STN_CART c
+		INNER JOIN STN_GOODS g ON g.GOODS_ID = c.GOODS_ID AND g.USE_AT = 'Y'
+		<include refid="selectCartListWhere"></include>
+	</select>
+
+	<select id="selectCartGoodsCnt" parameterType="modoo.module.shop.goods.cart.service.CartVO" resultType="int">
+		SELECT
+		count(*) AS CNT
+		FROM	STN_CART c
+		INNER JOIN STN_GOODS g ON g.GOODS_ID = c.GOODS_ID AND g.USE_AT = 'Y' and g.GOODS_ID = #{goodsId}
+		where c.CART_ADD_AT = 'Y'
+		AND c.USE_AT = 'Y'
+		AND c.ORDRR_ID = #{searchOrdrrId}
+		group by c.
+	</select>
+
+	<!-- 장바구니 저장 -->
+	<insert id="insertCart" parameterType="modoo.module.shop.goods.cart.service.CartVO">
+		INSERT INTO STN_CART (
+			CART_NO
+			,CART_GROUP_NO
+			,GOODS_ID
+			,ORDRR_ID
+			,SBSCRPT_CYCLE_SE_CODE
+			,SBSCRPT_WEEK_CYCLE
+			,SBSCRPT_DLVY_WD
+			,SBSCRPT_USE_WEEK
+			,SBSCRPT_MT_CYCLE
+			,SBSCRPT_USE_MT
+			,SBSCRPT_DLVY_DAY
+			,ORDER_CO
+			,CART_ADD_AT
+			,EXPRN_USE_AT
+			,COMPNO_DSCNT_USE_AT
+			,REGIST_PNTTM
+			,USE_AT
+			,CHLDRN_NM
+			,CHLDRN_ID
+			,D_OPTN_TYPE
+		) VALUES (
+			#{cartNo}
+			,#{cartGroupNo}
+			,#{goodsId}
+			,#{ordrrId}
+			,#{sbscrptCycleSeCode}
+			,#{sbscrptWeekCycle}
+			,#{sbscrptDlvyWd}
+			,#{sbscrptUseWeek}
+			,#{sbscrptMtCycle}
+			,#{sbscrptUseMt}
+			,#{sbscrptDlvyDay}
+			,#{orderCo}
+			,#{cartAddAt}
+			,#{exprnUseAt}
+			,#{compnoDscntUseAt}
+			,SYSDATE()
+			,'Y'
+			,#{chldrnNm}
+			,#{chldrnId}
+			,#{dOptnType}
+		)
+	</insert>
+
+	<!-- 장바구니 수정-->
+	<update id="updateCart" parameterType="modoo.module.shop.goods.cart.service.CartVO">
+		UPDATE  STN_CART SET
+			SBSCRPT_WEEK_CYCLE=#{sbscrptWeekCycle}
+			,SBSCRPT_DLVY_WD=#{sbscrptDlvyWd}
+			,SBSCRPT_MT_CYCLE=#{sbscrptMtCycle}
+			,SBSCRPT_DLVY_DAY=#{sbscrptDlvyDay}
+			,ORDER_CO=#{orderCo}
+			,COMPNO_DSCNT_USE_AT=#{compnoDscntUseAt}
+		WHERE CART_NO=#{cartNo}
+
+	</update>
+
+	<!-- 장바구니 수정-->
+	<update id="updateCartItem" parameterType="modoo.module.shop.goods.cart.service.CartItem">
+		UPDATE  STN_CART_ITEM SET
+			GITEM_CO = #{gitemCo}
+		WHERE CART_NO=#{cartNo}
+
+	</update>
+
+	<!-- 장바구니항목 저장 -->
+	<insert id="insertCartItem" parameterType="modoo.module.shop.goods.cart.service.CartItem">
+		INSERT INTO STN_CART_ITEM (
+			CART_ITEM_NO
+			,CART_NO
+			,GITEM_ID
+			,GITEM_SE_CODE
+			,GITEM_NM
+			,GITEM_PC
+			,GITEM_CO
+			,GITEM_ANSWER
+		)
+		SELECT
+			#{cartItemNo}
+			,#{cartNo}
+			,GITEM_ID
+			,GITEM_SE_CODE
+			,GITEM_NM
+			,GITEM_PC
+			,#{gitemCo}
+			,#{gitemAnswer}
+		FROM	STN_GOODS_ITEM
+		WHERE	GITEM_ID = #{gitemId}
+	</insert>
+
+	<!-- 장바구니 항목 삭제 -->
+	<delete id="deleteCartItem" parameterType="modoo.module.shop.goods.cart.service.CartItem">
+		DELETE FROM STN_CART_ITEM
+		WHERE CART_NO = #{cartNo}
+	</delete>
+
+	<!-- 장바구니 항목 삭제 -->
+	<delete id="deleteCart" parameterType="modoo.module.shop.goods.cart.service.CartVO">
+		delete FROM STN_CART
+		<where>
+			<choose>
+				<when test="@egovframework.com.cmm.util.EgovMybaitsUtil@isNotEmpty(cartItemList)">
+					CART_NO IN
+						(
+							select
+								a.CART_NO
+							from STN_CART a
+							where a.CART_GROUP_NO = #{cartGroupNo}
+		       				and a.CART_NO not in
+							<foreach collection="cartItemList" item="item" separator="," open="(" close=")">
+								#{item.cartNo}
+							</foreach>
+						)
+				</when>
+				<otherwise>
+					CART_GROUP_NO = #{cartGroupNo}
+				</otherwise>
+			</choose>
+		</where>
+
+	</delete>
+
+	<!-- 장바구니항목 목록 -->
+	<select id="selectCartItemList" parameterType="modoo.module.shop.goods.cart.service.CartItem" resultType="modoo.module.shop.goods.cart.service.CartItem">
+		SELECT
+			CART_ITEM_NO
+			,CART_NO
+			,GITEM_ID
+			,GITEM_SE_CODE
+			,GITEM_NM
+			,GITEM_PC
+			,GITEM_CO
+			,GITEM_ANSWER
+		FROM	STN_CART_ITEM
+		WHERE	CART_NO = #{cartNo}
+		order by GITEM_SE_CODE asc
+	</select>
+
+	<!-- 장바구니 닫기 -->
+	<update id="updateCartClose" parameterType="modoo.module.shop.goods.cart.service.CartVO">
+		UPDATE STN_CART
+		SET	CART_ADD_AT = 'N'
+		WHERE	CART_NO = #{cartNo}
+	</update>
+
+	<update id="updateCartGroupClose" parameterType="modoo.module.shop.goods.cart.service.CartVO">
+		UPDATE STN_CART
+		SET	CART_ADD_AT = 'N'
+		WHERE	CART_GROUP_NO = #{cartGroupNo}
+	</update>
+
+	<!--동일상품 장바구니 여부-->
+	<select id="selectCartExistCnt" parameterType="modoo.module.shop.goods.cart.service.CartVO" resultType="int">
+	SELECT
+		count(DISTINCT A.CART_GROUP_NO) AS CNT
+	FROM STN_CART A
+	where A.USE_AT = 'Y'
+	AND A.ORDRR_ID = #{searchOrdrrId}
+	AND A.GOODS_ID = #{goodsId}
+	AND A.CART_ADD_AT = 'Y'
+	</select>
+
+	<!-- 카트 그룹 저장 -->
+	<insert id="insertCartGroup" parameterType="egovMap">
+		INSERT INTO STN_CART_GROUP (
+			CART_GROUP_NO
+		) VALUES (
+			 #{cartGroupNo}
+		 )
+	</insert>
+
+	<select id="selectGroupGoodsInfo" parameterType="modoo.module.shop.goods.cart.service.CartVO" resultType="egovMap">
+		<!--SELECT
+		g.GOODS_NM
+		,g.EXPRN_USE_AT
+		,ifnull(g.EXPRN_PC , '0') as EXPRN_PC
+		,ifnull(g.VCH_CODE , 'N') as VCH_CODE
+		,g.DPSTRY_AT
+		,g.DPSTRY_NO_LIST
+		,g.GOODS_PC
+		,g.GOODS_INTRCN
+		,(SELECT GOODS_IMAGE_THUMB_PATH FROM STN_GOODS_IMAGE WHERE GOODS_ID = g.GOODS_ID AND GOODS_IMAGE_SE_CODE = 'GNR' ORDER BY GOODS_IMAGE_SN ASC LIMIT 1 ) AS GOODS_TITLE_IMAGE_PATH
+		,cc.CART_GROUP_NO
+		,g.VCH_CODE
+		,g.VCH_VALID_PD
+		,g.CHLDRNNM_USE_AT
+		,g.SBSCRPT_CYCLE_SE_CODE
+		,g.DPSTRY_AT
+		,g.GOODS_KND_CODE
+		FROM STN_GOODS g
+		inner join (
+			select
+				c.*
+			from STN_CART c
+			<include refid="selectCartListWhere"></include>
+			group by c.CART_GROUP_NO
+		) cc on g.GOODS_ID = cc.GOODS_ID
+		INNER JOIN STN_GOODS_ITEM_INFO d ON g.GOODS_ID = d.GOODS_ID
+		where g.USE_AT  = 'Y'
+		ORDER BY CART_GROUP_NO DESC
+
+-->
+		SELECT
+		g.GOODS_NM
+		,g.EXPRN_USE_AT
+		,ifnull(g.EXPRN_PC , '0') as EXPRN_PC
+		,ifnull(g.VCH_CODE , 'N') as VCH_CODE
+		,g.DPSTRY_AT
+		,g.DPSTRY_NO_LIST
+		,g.GOODS_PC
+		,g.GOODS_INTRCN
+		,g.GOODS_ID
+		,(SELECT GOODS_IMAGE_THUMB_PATH FROM STN_GOODS_IMAGE WHERE GOODS_ID = g.GOODS_ID AND GOODS_IMAGE_SE_CODE = 'GNR' ORDER BY GOODS_IMAGE_SN ASC LIMIT 1 ) AS GOODS_TITLE_IMAGE_PATH
+		,c.CART_GROUP_NO
+		,g.VCH_CODE
+		,g.VCH_VALID_PD
+		,g.CHLDRNNM_USE_AT
+		,g.SBSCRPT_CYCLE_SE_CODE
+		,g.GOODS_CTGRY_ID
+		,IFNULL(g.DPSTRY_AT,"N")
+		,g.GOODS_KND_CODE
+		,g.EXPRN_USE_AT
+		,g.EXPRN_PC
+		,g.D_OPTN_TYPE
+		,g.FREE_DLVY_PC
+		,g.DLVY_PC
+		FROM STN_CART c
+		INNER JOIN STN_GOODS g ON g.GOODS_ID = c.GOODS_ID and g.USE_AT  = 'Y' and g.GOODS_KND_CODE = #{goodsKndCode}
+		<include refid="selectCartListWhere"></include>
+		and c.CART_GROUP_NO is not null
+		GROUP BY c.CART_GROUP_NO
+	</select>
+</mapper>

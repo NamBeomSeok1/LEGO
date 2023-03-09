@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="modoo.module.shop.goods.info.service.impl.GoodsItemMapper">
+
+	<!-- 상품항목 목록 -->
+	<select id="selectGoodsItemList" parameterType="modoo.module.shop.goods.info.service.GoodsItemVO" resultType="modoo.module.shop.goods.info.service.GoodsItemVO">
+		SELECT
+		gi.GITEM_ID
+		,gi.GOODS_ID
+		,gi.GITEM_SE_CODE
+		,gi.GITEM_SN
+		,gi.GITEM_NM
+		,gi.GITEM_CO
+		,gi.GITEM_PC
+		,gi.GITEM_STTUS_CODE
+		,(SELECT CODE_NM FROM DTC_CMMN_DETAIL_CODE WHERE CODE_ID='CMS024' AND CODE = gi.GITEM_SE_CODE) AS GITEM_SE_CODE_NM
+		,gi.GITEM_TITLE
+		FROM	STN_GOODS_ITEM gi
+		WHERE	gi.GOODS_ID = #{goodsId}
+		<if test="@egovframework.com.cmm.util.EgovMybaitsUtil@isNotEmpty(gitemSeCode)">
+			AND gi.GITEM_SE_CODE = #{gitemSeCode}
+		</if>
+		<if test="@egovframework.com.cmm.util.EgovMybaitsUtil@isEmpty(adminPageAt)">
+			and gi.GITEM_STTUS_CODE != 'F'
+		</if>
+		order by gi.GITEM_SN asc
+
+	</select>
+
+	<!-- 상품항목 목록 -->
+	<select id="selectGoodsItem" parameterType="modoo.module.shop.goods.info.service.GoodsItemVO" resultType="modoo.module.shop.goods.info.service.GoodsItemVO">
+		SELECT
+			gi.GITEM_ID
+			 ,gi.GOODS_ID
+			 ,gi.GITEM_SE_CODE
+			 ,gi.GITEM_SN
+			 ,gi.GITEM_NM
+			 ,gi.GITEM_CO
+			 ,gi.GITEM_PC
+			 ,gi.GITEM_STTUS_CODE
+			 ,(SELECT CODE_NM FROM DTC_CMMN_DETAIL_CODE WHERE CODE_ID='CMS024' AND CODE = gi.GITEM_SE_CODE) AS GITEM_SE_CODE_NM
+		FROM	STN_GOODS_ITEM gi
+		WHERE	gi.GITEM_ID = #{gitemId}
+	</select>
+
+	<!-- 상품항목 저장 -->
+	<insert id="insertGoodsItem" parameterType="modoo.module.shop.goods.info.service.GoodsItemVO">
+		INSERT INTO STN_GOODS_ITEM (
+				GITEM_ID
+				,GOODS_ID
+				,GITEM_SE_CODE
+				,GITEM_SN
+				,GITEM_NM
+				,GITEM_CO
+				,GITEM_PC
+				,GITEM_STTUS_CODE
+				,GITEM_TITLE
+
+		) VALUES (
+				#{gitemId}
+				 ,#{goodsId}
+				 ,#{gitemSeCode}
+				 ,#{gitemSn}
+				 ,#{gitemNm}
+				 ,#{gitemCo}
+				 ,#{gitemPc}
+				 ,#{gitemSttusCode}
+				 ,#{gitemTitle}
+		 )
+	</insert>
+
+	<!-- 상품항목 저장
+	<insert id="insertGoodsItem" parameterType="modoo.module.shop.goods.info.service.GoodsItemVO">
+		INSERT INTO STN_GOODS_ITEM (
+				GITEM_ID
+			   ,GOODS_ID
+			   ,GITEM_SE_CODE
+			   ,GITEM_SN
+			   ,GITEM_NM
+			   ,GITEM_CO
+			   ,GITEM_PC
+			   ,GITEM_STTUS_CODE
+		) VALUES (
+					 #{gitemId}
+				 ,#{goodsId}
+				 ,#{gitemSeCode}
+				 ,#{gitemSn}
+				 ,#{gitemNm}
+				 ,#{gitemCo}
+				 ,#{gitemPc}
+				 ,#{gitemSttusCode}
+				 )
+	</insert>-->
+
+	<!-- 상품항목 수정 -->
+	<update id="updateGoodsItem" parameterType="modoo.module.shop.goods.info.service.GoodsItemVO">
+		UPDATE STN_GOODS_ITEM
+		SET
+			GOODS_ID = #{goodsId}
+		  ,GITEM_SE_CODE = #{gitemSeCode}
+		  ,GITEM_SN = #{gitemSn}
+		  ,GITEM_NM = #{gitemNm}
+		  ,GITEM_CO = #{gitemCo}
+		  ,GITEM_PC = #{gitemPc}
+		  ,GITEM_STTUS_CODE = #{gitemSttusCode}
+		WHERE	GITEM_ID = #{gitemId}
+	</update>
+
+	<!-- 상품항목 삭제 -->
+	<delete id="deleteGoodsItem" parameterType="modoo.module.shop.goods.info.service.GoodsItemVO">
+		DELETE FROM STN_GOODS_ITEM
+		WHERE	GITEM_ID = #{gitemId}
+	</delete>
+
+	<!-- 상품항목 목록 삭제 -->
+	<delete id="deleteGoodsItemList" parameterType="modoo.module.shop.goods.info.service.GoodsItemVO">
+		DELETE FROM STN_GOODS_ITEM
+		WHERE	GOODS_ID = #{goodsId}
+		<if test="@egovframework.com.cmm.util.EgovMybaitsUtil@isNotEmpty(gitemSeCode)">
+			AND GITEM_SE_CODE = #{gitemSeCode}
+		</if>
+	</delete>
+
+
+	<!-- 옵션 저장 -->
+	<insert id="insertGoodsOptMaster" parameterType="modoo.module.shop.goods.info.service.GoodsVO">
+		INSERT INTO STN_GOODS_OPT_MASTER (
+			GOPTN_ID
+			,GOODS_ID
+			,D_OPTN_TYPE
+			,FRST_REGIST_PNTTM
+			,FRST_REGISTER_ID
+		) VALUES (
+		    #{gOptnId}
+			,#{goodsId}
+			,#{dOptnType}
+			,SYSDATE()
+			,#{frstRegisterId}
+		 )
+			ON DUPLICATE KEY UPDATE
+			 D_OPTN_TYPE = #{dOptnType}
+			 ,LAST_UPDT_PNTTM = SYSDATE()
+			 ,LAST_UPDUSR_ID = #{lastUpdusrId}
+	</insert>
+
+
+	<!-- 옵션 기본항목 저장 -->
+	<insert id="insertGoodsOptCom" parameterType="egovMap">
+		INSERT INTO STN_GOODS_OPT_COM (
+			GOODS_ID
+			,OPTN_ORDER
+			,OPTN_NAME
+			,OPTN_VALUE
+		) VALUES
+		<foreach collection="optList" item="opt" separator=",">
+		(
+			#{goodsId}
+			,#{opt.optnOrder}
+			,#{opt.optnName}
+			,#{opt.optnValue}
+		)
+		</foreach>
+	</insert>
+
+	<!-- 옵션상세 저장 -->
+	<insert id="insertGoodsOptDetail" parameterType="egovMap">
+		INSERT INTO STN_GOODS_OPT_DETAIL (
+			GOODS_ID
+			,OPTN_ORDER
+			,OPTN_NAMES
+			,OPTN_VALUES
+			,OPTN_PC
+			,OPTN_CO
+			,OPTN_SOLD_OUT_AT
+		) VALUES
+		<foreach collection="itemList" item="item" separator=",">
+		(
+			#{goodsId}
+			,#{item.optnOrder}
+			,#{item.optnNames}
+			,#{item.optnValues}
+			,#{item.optnPc}
+			,#{item.optnCo}
+			,#{item.optnSoldOutAt}
+		)
+		</foreach>
+	</insert>
+
+	<select id="selectOptnComList" parameterType="modoo.module.shop.goods.info.service.GoodsItemVO" resultType="egovMap">
+		SELECT
+			OPTN_ORDER
+			 ,OPTN_NAME
+			 ,OPTN_VALUE
+		FROM	STN_GOODS_OPT_COM
+		WHERE	GOODS_ID = #{goodsId}
+	</select>
+
+	<select id="selectOptnDetailList" parameterType="modoo.module.shop.goods.info.service.GoodsItemVO" resultType="egovMap">
+		SELECT
+			OPTN_ORDER
+			 ,OPTN_VALUES
+			 ,OPTN_NAMES
+			 ,OPTN_PC
+			 ,OPTN_CO
+			 ,OPTN_SOLD_OUT_AT
+		FROM	STN_GOODS_OPT_DETAIL
+		WHERE	GOODS_ID = #{goodsId}
+	</select>
+
+	<delete id="deleteGoodsOptn" parameterType="modoo.module.shop.goods.info.service.GoodsItemVO">
+		DELETE  a, b
+		FROM STN_GOODS_OPT_COM a
+		inner join STN_GOODS_OPT_DETAIL b on a.GOODS_ID = b.GOODS_ID
+		WHERE a.GOODS_ID = #{goodsId}
+	</delete>
+
+	<select id="selectOptnValues" parameterType="egovMap" resultType="modoo.module.shop.goods.info.service.GoodsItemVO">
+		SELECT
+			GITEM_ID
+			 ,GITEM_NM
+			 ,GITEM_CO
+			 ,GITEM_PC
+			 ,GITEM_STTUS_CODE
+		FROM	STN_GOODS_ITEM
+		WHERE	GOODS_ID = #{goodsId}
+		AND GITEM_SE_CODE = 'D'
+		AND GITEM_NM LIKE CONCAT('%', #{opt1}, '%')
+		ORDER BY GITEM_SN ASC
+	</select>
+
+</mapper>

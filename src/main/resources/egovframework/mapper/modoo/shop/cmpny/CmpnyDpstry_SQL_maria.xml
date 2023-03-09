@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="modoo.module.shop.cmpny.service.impl.CmpnyDpstryMapper">
+
+	<!--입점 문의 리스트 -->
+	<select id="selectCmpnyDpstryList" parameterType="modoo.module.shop.cmpny.service.CmpnyDpstryVO" resultType="modoo.module.shop.cmpny.service.CmpnyDpstryVO">
+		SELECT 
+			DPSTRY_NO
+			,CMPNY_ID
+			,DPSTRY_NM
+		    ,DPSTRY_ADRES
+		    ,DPSTRY_ZIP
+		    ,TELNO
+			,REGIST_PNTTM
+		FROM STN_CMPNY_DPSTRY a
+		<include refid="selectCmpnyDpstryWhere"></include>
+		ORDER BY REGIST_PNTTM DESC
+
+	</select>
+	
+	<!-- 입점 문의 목록 갯수 -->
+	<select id="selectCmpnyDpstryListCnt" parameterType="modoo.module.shop.cmpny.service.CmpnyDpstryVO" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM STN_CMPNY_DPSTRY
+		<include refid="selectCmpnyDpstryWhere"></include>
+	</select>
+
+	<sql id="selectCmpnyDpstryWhere">
+		WHERE
+			1=1
+		<if test="cmpnyId != null">
+			AND CMPNY_ID = #{cmpnyId}
+		</if>
+		<if test="searchDpstryNoList != null">
+			AND DPSTRY_NO IN
+			<foreach collection="searchDpstryNoList" item="item" separator="," open="(" close=")">
+			#{item}
+			</foreach>
+		</if>
+	</sql>
+	
+	<insert id="insertCmpnyDpstry" parameterType="modoo.module.shop.cmpny.service.CmpnyInqryVO">
+		INSERT INTO STN_CMPNY_DPSTRY
+		(
+			CMPNY_ID
+			,DPSTRY_NM
+			,DPSTRY_ADRES
+			,DPSTRY_ZIP
+			,TELNO
+			,REGIST_PNTTM
+		)VALUES
+		(
+			#{cmpnyId}
+			,#{dpstryNm}
+			,#{dpstryAdres}
+			,#{dpstryZip}
+			,#{telno}
+			,SYSDATE()
+		)
+	</insert>
+
+	<update id="updateCmpnyDpstry" parameterType="modoo.module.shop.cmpny.service.CmpnyDpstryVO">
+		UPDATE STN_CMPNY_DPSTRY
+		SET
+			CMPNY_ID = #{cmpnyId}
+		  ,DPSTRY_NM = #{dpstryNm}
+		  ,DPSTRY_ADRES = #{dpstryAdres}
+		  ,DPSTRY_ZIP = #{dpstryZip}
+		  ,TELNO = #{telno}
+		WHERE	DPSTRY_NO = #{dpstryNo}
+	</update>
+
+	<update id="
+" parameterType="modoo.module.shop.cmpny.service.CmpnyDpstryVO">
+		DELETE FROM STN_CMPNY_DPSTRY
+		WHERE	DPSTRY_NO = #{dpstryNo}
+	</update>
+
+	<delete id="deleteCmpnyDpstry" parameterType="modoo.module.shop.cmpny.service.CmpnyInqryVO">
+		DELETE FROM STN_CMPNY_DPSTRY
+		WHERE
+			DPSTRY_NO = #{dpstryNo}
+	</delete>
+	
+	<!--<select id="selectCmpnyInqry" parameterType="modoo.module.shop.cmpny.service.CmpnyInqryVO" resultType="modoo.module.shop.cmpny.service.CmpnyInqryVO">
+		SELECT 
+			a.INQRY_ID
+			,a.ESNTL_ID
+			,a.ATCH_FILE_ID
+			,a.CMPNY_EMAIL
+			,a.CMPNY_INTRCN
+			,a.GOODS_INTRCN
+			,a.CMPNY_NM
+			,a.CMPNY_CHARGER
+			,a.TELNO
+			,a.FRST_REGIST_PNTTM
+		FROM STN_CMPNY_INQRY a
+		LEFT JOIN DTN_FILE b ON a.ATCH_FILE_ID = b.ATCH_FILE_ID
+		WHERE INQRY_ID = #{inqryId}
+	</select>-->
+	
+</mapper>

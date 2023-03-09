@@ -1,0 +1,45 @@
+@charset "UTF-8";
+/*
+	Author	: hyojeong yang
+	Date	: 2022-10-18
+	Project	: DX 교육데이터 협회
+*/
+
+@use "sass:meta";
+@use "sass:list";
+@use "sass:math";
+
+/* abstracts */
+@import "abstracts/variables";
+@import "abstracts/mixins";
+
+/* base */
+@import "base/font";
+@import "base/reset";
+@import "base/animation";
+
+/*vendors*/
+@import url('vendors/animate.css');
+@import url('vendors/swiper-bundle.css');
+@import "vendors/vendor-cus";
+
+/*component*/
+@import "component/button";
+@import "component/input";
+@import "component/ico";
+@import "component/label";
+@import "component/table";
+@import "component/popup";
+@import "component/paging";
+@import "component/accordion";
+@import "component/tabs";
+@import "component/component";
+
+/* layout */
+@import "layout/header";
+@import "layout/body";
+@import "layout/footer";
+
+/* page */
+@import "page/main";
+@import "page/sub";

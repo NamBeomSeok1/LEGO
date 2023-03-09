@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="modoo.module.shop.goods.info.service.impl.GoodsMberMapngMapper">
+
+	<insert id="insertGoodsMberMapng" parameterType="egovMap">
+		INSERT INTO STN_GOODS_MBER_MAPNG
+		(
+			GOODS_ID
+			,MBER_ID
+		)
+		VALUES(
+			#{goodsId}
+			, #{mberId}
+		)
+	</insert>
+	
+	<delete id="deleteGoodsMberMapngList" parameterType="egovMap">
+		DELETE
+		FROM STN_GOODS_MBER_MAPNG
+		WHERE GOODS_ID = #{goodsId}
+	</delete>
+	
+	<select id="selectGoodsMberMapngList" parameterType="modoo.module.event.service.impl.GoodsEventMapngVO" resultType="String">
+		SELECT
+			 MBER_ID
+		FROM STN_GOODS_MBER_MAPNG A
+		JOIN STN_GOODS B ON A.GOODS_ID = B.GOODS_ID
+		WHERE A.GOODS_ID = #{goodsId}
+	</select>
+</mapper>
